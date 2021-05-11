@@ -15,7 +15,7 @@ class HealTalk extends StatelessWidget {
           title: Text("HealTalk"),
         ),
         body: Center(
-          child: Text("Let Start!!"),
+          child: Text("my code"),
         ),
       ),
     );
