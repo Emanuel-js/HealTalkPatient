@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:healTalkpatient/Color/color.dart';
+import 'package:healTalkpatient/index.dart';
 
 class AppTheme {
   static ThemeData define() {
     final colors = Appcolor();
     return ThemeData(
       fontFamily: "lato",
-      primaryColor: colors.primarygreenColor,
-      scaffoldBackgroundColor: colors.bkColor,
-      accentColor: colors.primarypinkColor,
+      primaryColor: colors.k_primerygreenColor,
+      scaffoldBackgroundColor: colors.k_bkColor,
+      accentColor: colors.k_seconderypurpleColor,
       textTheme: TextTheme(
         headline4: TextStyle(
           fontWeight: FontWeight.w900,

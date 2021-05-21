@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:healTalkpatient/Color/color.dart';
+import 'package:healTalkpatient/index.dart';
 
 class Button1 extends StatelessWidget {
   final colors = Appcolor();
@@ -20,7 +20,7 @@ class Button1 extends StatelessWidget {
       color: color,
       child: Text(
         text,
-        style: TextStyle(color: colors.white),
+        style: TextStyle(color: colors.k_white),
       ),
     );
   }
@@ -44,11 +44,11 @@ class OutlineButton1 extends StatelessWidget {
       child: Text(
         text,
         style: TextStyle(
-          color: colors.primarygreenColor,
+          color: colors.k_primerygreenColor,
           fontWeight: FontWeight.w900,
         ),
       ),
-      borderSide: BorderSide(color: colors.primarygreenColor, width: 3),
+      borderSide: BorderSide(color: colors.k_primerygreenColor, width: 3),
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(22.2)),
       ),
