@@ -8,7 +8,7 @@ export 'Screen/loginScreen.dart';
 export 'Screen/introScreen/firstscreen.dart';
 export 'Screen/introScreen/introScreen.dart';
 export 'Screen/introScreen/intropage.dart';
-
+export 'Screen/registerScreen.dart';
 //export utility
 
 //export component

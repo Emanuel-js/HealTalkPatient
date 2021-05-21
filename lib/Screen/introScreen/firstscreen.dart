@@ -8,52 +8,67 @@ class FirstScreen extends StatelessWidget {
 
     return Scaffold(
       body: SafeArea(
-          child: Column(
-        // mainAxisAlignment: MainAxisAlignment.center,
-        mainAxisSize: MainAxisSize.max,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          //Todo title
-          SizedBox(
-            height: MediaQuery.of(context).size.height / 20,
-          ),
-          Text(
-            "Your #1 Choice",
-            style: Theme.of(context).textTheme.headline4,
-            textAlign: TextAlign.center,
-          ),
-          //Todo logo
-          SizedBox(
-            height: MediaQuery.of(context).size.height / 5,
-          ),
-          Center(
-            child: Image.asset(
-              "asset/img/logo.png",
-              width: MediaQuery.of(context).size.width - 10,
+        child: Column(
+          // mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.max,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            //Todo title
+            SizedBox(
+              height: MediaQuery.of(context).size.height / 20,
             ),
-          ),
-          //Todo button
-          SizedBox(
-            height: MediaQuery.of(context).size.height / 3,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              //button 1
-              Button1(
-                text: "Register",
-                color: colors.k_primerygreenColor,
-              ),
+            Text(
+              "Your #1 Choice",
+              style: Theme.of(context).textTheme.headline4,
+              textAlign: TextAlign.center,
+            ),
 
-              //button 2
-              OutlineButton1(
-                text: "Login",
-                color: colors.k_primerygreenColor,
-              )
-            ],
-          )
-        ],
-      )),
+            SizedBox(
+              height: MediaQuery.of(context).size.height / 5,
+            ),
+            Center(
+              child: Image.asset(
+                "asset/img/logo.png",
+                width: MediaQuery.of(context).size.width - 10,
+              ),
+            ),
+
+            SizedBox(
+              height: MediaQuery.of(context).size.height / 3,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                //button 1
+                Button1(
+                  text: "Register",
+                  color: colors.k_primerygreenColor,
+                  onpress: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (BuildContext context) => RegisterScreen(),
+                        ));
+                  },
+                ),
+
+                //button 2
+                OutlineButton1(
+                  text: "Login",
+                  color: colors.k_primerygreenColor,
+                  onpress: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (BuildContext context) => LoginScreen(),
+                        ));
+                  },
+                )
+              ],
+            )
+          ],
+        ),
+      ),
     );
   }
 }

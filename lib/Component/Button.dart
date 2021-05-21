@@ -17,7 +17,9 @@ class Button1 extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(15.2)),
       ),
-      onPressed: () {},
+      onPressed: () {
+        onpress();
+      },
       color: color,
       child: Text(
         text,
@@ -53,6 +55,27 @@ class OutlineButton1 extends StatelessWidget {
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(15.2)),
       ),
+    );
+  }
+}
+
+class IconBtn extends StatelessWidget {
+  IconBtn({this.icon, this.color, this.onpress});
+
+  final icon;
+  final color;
+  final onpress;
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      icon: Icon(
+        icon,
+        color: color,
+      ),
+      onPressed: () {
+        onpress();
+      },
     );
   }
 }
