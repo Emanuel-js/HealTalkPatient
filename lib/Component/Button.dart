@@ -11,10 +11,11 @@ class Button1 extends StatelessWidget {
   ///
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return RaisedButton(
-      padding: EdgeInsets.symmetric(vertical: 15, horizontal: 60),
+      padding: EdgeInsets.symmetric(vertical: 15, horizontal: size.width / 10),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(22.2)),
+        borderRadius: BorderRadius.all(Radius.circular(15.2)),
       ),
       onPressed: () {},
       color: color,
@@ -40,7 +41,7 @@ class OutlineButton1 extends StatelessWidget {
       onPressed: () {
         onpress();
       },
-      padding: EdgeInsets.symmetric(vertical: 15, horizontal: size.width / 6),
+      padding: EdgeInsets.symmetric(vertical: 15, horizontal: size.width / 10),
       child: Text(
         text,
         style: TextStyle(
@@ -50,7 +51,7 @@ class OutlineButton1 extends StatelessWidget {
       ),
       borderSide: BorderSide(color: colors.k_primerygreenColor, width: 3),
       shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(22.2)),
+        borderRadius: BorderRadius.all(Radius.circular(15.2)),
       ),
     );
   }
