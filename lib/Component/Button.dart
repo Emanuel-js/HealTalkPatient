@@ -79,3 +79,24 @@ class IconBtn extends StatelessWidget {
     );
   }
 }
+
+class CheckBox1 extends StatelessWidget {
+  final colors = Appcolor();
+  CheckBox1({this.isChecked, this.title, this.onChange});
+
+  final isChecked;
+  final title;
+  final onChange;
+  @override
+  Widget build(BuildContext context) {
+    return CheckboxListTile(
+      title: Text(title),
+      value: isChecked,
+      checkColor: colors.k_white,
+      onChanged: (value) {
+        onChange(value);
+      },
+      controlAffinity: ListTileControlAffinity.leading,
+    );
+  }
+}

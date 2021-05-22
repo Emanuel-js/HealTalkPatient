@@ -75,17 +75,17 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 // check box
-                CheckboxListTile(
-                  title: Text("Remember me"),
-                  value: isChecked,
-                  checkColor: colors.k_white,
-                  onChanged: (newValue) {
-                    setState(() {
-                      isChecked = newValue;
-                    });
-                  },
-                  controlAffinity: ListTileControlAffinity.leading,
-                ),
+                Container(
+                    padding: EdgeInsets.only(left: 10),
+                    child: CheckBox1(
+                      onChange: (newValue) {
+                        setState(() {
+                          isChecked = newValue;
+                        });
+                      },
+                      title: "Remember Me",
+                      isChecked: isChecked,
+                    )),
                 //todo button
                 SizedBox(
                   height: 20,
@@ -95,7 +95,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   text: "login",
                   onpress: () => {
                     print(
-                        "Email: ${emailControler.text} \n password: ${passwordControler.text}")
+                        "Email: ${emailControler.text} \n password: ${passwordControler.text} ischecked = ${isChecked}")
                   },
                 )
               ],

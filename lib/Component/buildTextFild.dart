@@ -29,6 +29,8 @@ class BuildText extends StatelessWidget {
               prefixIcon: iconPrifix,
               suffixIcon: _textClear(),
               labelText: lebel,
+              // errorText:
+              //     controler.text.isEmpty ? "Please input ${lebel}" : null,
               border: OutlineInputBorder(),
             ),
             keyboardType: keybordType,

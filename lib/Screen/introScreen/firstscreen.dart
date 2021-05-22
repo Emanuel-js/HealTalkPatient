@@ -7,6 +7,7 @@ class FirstScreen extends StatelessWidget {
     final colors = Appcolor();
 
     return Scaffold(
+      backgroundColor: colors.k_white,
       body: SafeArea(
         child: Column(
           // mainAxisAlignment: MainAxisAlignment.center,
@@ -44,11 +45,7 @@ class FirstScreen extends StatelessWidget {
                   text: "Register",
                   color: colors.k_primerygreenColor,
                   onpress: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (BuildContext context) => RegisterScreen(),
-                        ));
+                    Navigator.push(context, createRoute(RegisterScreen()));
                   },
                 ),
 
@@ -57,11 +54,7 @@ class FirstScreen extends StatelessWidget {
                   text: "Login",
                   color: colors.k_primerygreenColor,
                   onpress: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (BuildContext context) => LoginScreen(),
-                        ));
+                    Navigator.push(context, createRoute(LoginScreen()));
                   },
                 )
               ],
