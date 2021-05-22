@@ -21,10 +21,7 @@ class IntroScreen1 extends StatelessWidget {
               color: colors.k_primerygreenColor,
               text: "Next",
               onpress: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (BuildContext context) => IntroScreen2()));
+                Navigator.push(context, createRoute(IntroScreen2()));
               },
             ),
             SizedBox(
@@ -51,7 +48,7 @@ class IntroScreen2 extends StatelessWidget {
               size: size,
               con: context,
               title: "Discuss about your problem",
-              disc: "We hope you get the best expriance here",
+              disc: "We hope you get the best experience here",
               img: "asset/img/Allura Socializing.png"),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -71,12 +68,7 @@ class IntroScreen2 extends StatelessWidget {
                 color: colors.k_primerygreenColor,
                 text: "Next",
                 onpress: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (BuildContext context) => IntroScreen3(),
-                    ),
-                  );
+                  Navigator.push(context, createRoute(IntroScreen3()));
                 },
               ),
             ],
@@ -126,12 +118,7 @@ class IntroScreen3 extends StatelessWidget {
                   color: colors.k_primerygreenColor,
                   text: "Done",
                   onpress: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (BuildContext context) => FirstScreen(),
-                      ),
-                    );
+                    Navigator.push(context, createRoute(FirstScreen()));
                   },
                 ),
               ],

@@ -9,7 +9,9 @@ export 'Screen/introScreen/firstscreen.dart';
 export 'Screen/introScreen/introScreen.dart';
 export 'Screen/introScreen/intropage.dart';
 export 'Screen/registerScreen.dart';
+
 //export utility
+export 'utility/createRoute.dart';
 
 //export component
 export 'Component/Button.dart';

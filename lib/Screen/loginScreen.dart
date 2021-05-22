@@ -10,11 +10,8 @@ class LoginScreen extends StatelessWidget {
         child: Column(
           children: [
             //todo back arrow
+
             Container(
-              padding: EdgeInsets.all(10),
-              margin: EdgeInsets.only(
-                right: MediaQuery.of(context).size.width,
-              ),
               child: IconBtn(
                 color: colors.k_primerygreenColor,
                 icon: Icons.arrow_back,
@@ -22,12 +19,15 @@ class LoginScreen extends StatelessWidget {
                   Navigator.pop(context);
                 },
               ),
+              padding: EdgeInsets.only(
+                right: MediaQuery.of(context).size.width - 50,
+              ),
             ),
             //todo logo
             Image.asset(
               "asset/img/logo.png",
               width: MediaQuery.of(context).size.width,
-            )
+            ),
             //todo email
 
             //todo password
