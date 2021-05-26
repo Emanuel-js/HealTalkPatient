@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:healTalkpatient/Component/buildTextFild.dart';
 import "../index.dart";
 
 class LoginScreen extends StatefulWidget {
@@ -33,6 +32,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 //todo back arrow
 
                 Container(
+                  margin: EdgeInsets.only(top: 20),
                   child: IconBtn(
                     color: colors.k_primerygreenColor,
                     icon: Icons.arrow_back,
@@ -41,27 +41,33 @@ class _LoginScreenState extends State<LoginScreen> {
                     },
                   ),
                   padding: EdgeInsets.only(
-                      right: MediaQuery.of(context).size.width - 50, top: 20),
+                      right: MediaQuery.of(context).size.width * 0.8),
                 ),
                 //todo logo
-                Image.asset(
-                  "asset/img/logo.png",
-                  width: MediaQuery.of(context).size.width,
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.1,
+                ),
+                Logo(context),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.05,
                 ),
                 //todo email
                 Container(
-                  padding: EdgeInsets.all(30),
+                  margin: EdgeInsets.only(bottom: 30, top: 30),
                   child: BuildText(
                     lebel: "Email",
                     ispassword: false,
                     controler: emailControler,
-                    iconPrifix: Icon(Icons.email),
+                    iconPrifix: Icon(
+                      Icons.email,
+                      color: colors.k_primerygreenColor,
+                    ),
                     isvisble: false,
                   ),
                 ),
                 //todo password
                 Container(
-                  padding: EdgeInsets.all(30),
+                  margin: EdgeInsets.only(bottom: 30),
                   child: BuildText(
                     lebel: "Password",
                     ispassword: true,
@@ -76,20 +82,22 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 // check box
                 Container(
-                    padding: EdgeInsets.only(left: 10),
-                    child: CheckBox1(
-                      onChange: (newValue) {
-                        setState(() {
-                          isChecked = newValue;
-                        });
-                      },
-                      title: "Remember Me",
-                      isChecked: isChecked,
-                    )),
+                  padding: EdgeInsets.only(left: 10),
+                  child: CheckBox1(
+                    onChange: (newValue) {
+                      setState(() {
+                        isChecked = newValue;
+                      });
+                    },
+                    title: "Remember Me",
+                    isChecked: isChecked,
+                  ),
+                ),
                 //todo button
                 SizedBox(
                   height: 20,
                 ),
+
                 Button1(
                   color: colors.k_primerygreenColor,
                   text: "login",

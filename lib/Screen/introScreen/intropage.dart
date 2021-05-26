@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:healTalkpatient/index.dart';
 
 class Intropages extends StatelessWidget {
   Intropages({this.con, this.title, this.disc, this.size, this.img});
@@ -12,34 +13,35 @@ class Intropages extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        mainAxisSize: MainAxisSize.max,
+        // mainAxisSize: MainAxisSize.max,
         children: [
-          // image
-          SizedBox(
-            height: 10,
+          Image.asset(
+            img,
+            width: MediaQuery.of(con).size.width * 0.9,
+            height: MediaQuery.of(con).size.height * 0.5,
           ),
-          Center(child: Image.asset(img)),
-          //title
-          SizedBox(
-            height: 30,
-          ),
-          Center(
+
+          Container(
+            margin: EdgeInsets.only(top: 50, bottom: 20),
             child: Text(
               title,
-              style: Theme.of(con).textTheme.headline5,
+              style: header1(),
               textAlign: TextAlign.center,
             ),
           ),
           //discription
-          SizedBox(
-            height: 10,
-          ),
-          Expanded(
+
+          Center(
+            child: Container(
+              // padding: EdgeInsets.all(10),
               child: Text(
-            disc,
-            style: Theme.of(con).textTheme.headline6,
-          )),
+                disc,
+                style: body1(),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ),
+
           //dote button
         ],
       ),

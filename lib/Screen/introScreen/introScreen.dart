@@ -10,6 +10,8 @@ class IntroScreen1 extends StatelessWidget {
     return SafeArea(
       child: Expanded(
         child: Column(
+          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
           children: [
             Intropages(
                 con: context,
