@@ -10,14 +10,12 @@ class FirstScreen extends StatelessWidget {
       backgroundColor: colors.k_white,
       body: SafeArea(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             //Todo title
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.03,
-            ),
+
             Text(
               "Your #1 Choice",
               style: header1(),
@@ -25,12 +23,12 @@ class FirstScreen extends StatelessWidget {
             ),
 
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.3,
+              height: MediaQuery.of(context).size.height * 0.1,
             ),
-            Center(child: Logo(context)),
+            Logo(context),
 
             SizedBox(
-              height: MediaQuery.of(context).size.height * 0.2,
+              height: MediaQuery.of(context).size.height * 0.3,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,

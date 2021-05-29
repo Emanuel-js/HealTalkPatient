@@ -23,6 +23,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     final colors = Appcolor();
     return Scaffold(
+      appBar: backAppBar(context: context, color: colors.k_white),
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Expanded(
@@ -31,18 +32,6 @@ class _LoginScreenState extends State<LoginScreen> {
               children: [
                 //todo back arrow
 
-                Container(
-                  margin: EdgeInsets.only(top: 20),
-                  child: IconBtn(
-                    color: colors.k_primerygreenColor,
-                    icon: Icons.arrow_back,
-                    onpress: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                  padding: EdgeInsets.only(
-                      right: MediaQuery.of(context).size.width * 0.8),
-                ),
                 //todo logo
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.1,
@@ -102,6 +91,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   color: colors.k_primerygreenColor,
                   text: "login",
                   onpress: () => {
+                    Navigator.push(context, createRoute(MainScreen())),
                     print(
                         "Email: ${emailControler.text} \n password: ${passwordControler.text} ischecked = ${isChecked}")
                   },

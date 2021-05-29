@@ -9,5 +9,6 @@ class Appcolor {
   final k_white = const Color(0xFFffffff);
   final k_balck = const Color(0xFF000000);
   final k_gray = const Color(0xFFF0F5FE);
+  final k_gray2 = const Color(0xFF878282);
   const Appcolor();
 }

@@ -58,7 +58,7 @@ class IntroScreen2 extends StatelessWidget {
               Container(
                 child: IconButton(
                   icon: Icon(
-                    Icons.arrow_back,
+                    Icons.arrow_back_ios,
                     color: colors.k_seconderypurpleColor,
                   ),
                   onPressed: () {
@@ -108,7 +108,7 @@ class IntroScreen3 extends StatelessWidget {
                 Container(
                   child: IconButton(
                     icon: Icon(
-                      Icons.arrow_back,
+                      Icons.arrow_back_ios,
                       color: colors.k_seconderypurpleColor,
                     ),
                     onPressed: () {

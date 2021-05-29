@@ -30,6 +30,33 @@ class Button1 extends StatelessWidget {
   }
 }
 
+class Button2 extends StatelessWidget {
+  final colors = Appcolor();
+  Button2({this.color, this.text, this.onpress});
+  final color;
+  final text;
+  final onpress;
+
+  ///
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    return RaisedButton(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.all(Radius.circular(15.2)),
+      ),
+      onPressed: () {
+        onpress();
+      },
+      color: color,
+      child: Text(
+        text,
+        style: TextStyle(color: colors.k_white),
+      ),
+    );
+  }
+}
+
 class OutlineButton1 extends StatelessWidget {
   OutlineButton1({this.color, this.text, this.onpress});
   final color;

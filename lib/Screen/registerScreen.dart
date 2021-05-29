@@ -31,136 +31,121 @@ class _RegisterScreenState extends State<RegisterScreen> {
         Navigator.push(context, createRoute(LoginScreen()));
       };
     return Scaffold(
+      appBar: backAppBar(context: context, color: colors.k_white),
       backgroundColor: colors.k_white,
       body: SingleChildScrollView(
-        child: Center(
-          child: Column(
-            // mainAxisAlignment: MainAxisAlignment.start,
+        child: SafeArea(
+          child: Center(
+            child: Column(
+              // mainAxisAlignment: MainAxisAlignment.start,
 
-            children: [
-              //back icon
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.01,
-              ),
-              Container(
-                margin: EdgeInsets.only(top: 30),
-                child: IconBtn(
+              children: [
+                //title
+                Container(
+                  margin: EdgeInsets.only(
+                      right: MediaQuery.of(context).size.width * 0.4),
+                  child: Text(
+                    "Create ",
+                    style: header1(),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(
+                      right: MediaQuery.of(context).size.width * 0.4),
+                  child: Text(
+                    " Account",
+                    style: header1(),
+                  ),
+                ),
+                //todo Form
+                Container(
+                  margin: EdgeInsets.only(bottom: 10, top: 50),
+                  child: BuildText(
+                    lebel: "Email",
+                    ispassword: false,
+                    controler: emailControler,
+                    iconPrifix: Icon(
+                      Icons.email,
+                      color: colors.k_primerygreenColor,
+                    ),
+                    isvisble: false,
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(bottom: 20, top: 10),
+                  child: BuildText(
+                    lebel: "Full Name",
+                    ispassword: false,
+                    controler: fullnameControler,
+                    iconPrifix: Icon(
+                      Icons.person,
+                      color: colors.k_primerygreenColor,
+                    ),
+                    isvisble: false,
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(bottom: 30),
+                  child: BuildText(
+                    lebel: "Password",
+                    ispassword: true,
+                    controler: passwordControler,
+                    isvisble: isvisble,
+                    onPress: () {
+                      setState(
+                        () {
+                          isvisble = !isvisble;
+                        },
+                      );
+                    },
+                  ),
+                ),
+                //Todo terms
+                CheckboxListTile(
+                  title: text(),
+                  value: isChecked,
+                  onChanged: (newValue) {
+                    setState(() {
+                      isChecked = newValue;
+                    });
+                  },
+                  controlAffinity: ListTileControlAffinity.leading,
+                ),
+
+                SizedBox(
+                  height: 40,
+                ),
+                Button1(
                   color: colors.k_primerygreenColor,
-                  icon: Icons.arrow_back,
-                  onpress: () {
-                    Navigator.pop(context);
+                  text: "Register",
+                  onpress: () => {
+                    Navigator.push(context, createRoute(VerificationScreen())),
+                    print(
+                        "Email: ${emailControler.text} \n password: ${passwordControler.text} ischecked = ${isChecked}")
                   },
                 ),
-                padding: EdgeInsets.only(
-                    right: MediaQuery.of(context).size.width * 0.8),
-              ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.04,
-              ),
-              //title
-              Container(
-                margin: EdgeInsets.only(
-                    right: MediaQuery.of(context).size.width * 0.4),
-                child: Text(
-                  "Create ",
-                  style: header1(),
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.only(
-                    right: MediaQuery.of(context).size.width * 0.4),
-                child: Text(
-                  " Account",
-                  style: header1(),
-                ),
-              ),
-              //todo Form
-              Container(
-                margin: EdgeInsets.only(bottom: 10, top: 50),
-                child: BuildText(
-                  lebel: "Email",
-                  ispassword: false,
-                  controler: emailControler,
-                  iconPrifix: Icon(
-                    Icons.email,
-                    color: colors.k_primerygreenColor,
-                  ),
-                  isvisble: false,
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.only(bottom: 20, top: 10),
-                child: BuildText(
-                  lebel: "Full Name",
-                  ispassword: false,
-                  controler: fullnameControler,
-                  iconPrifix: Icon(
-                    Icons.person,
-                    color: colors.k_primerygreenColor,
-                  ),
-                  isvisble: false,
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.only(bottom: 30),
-                child: BuildText(
-                  lebel: "Password",
-                  ispassword: true,
-                  controler: passwordControler,
-                  isvisble: isvisble,
-                  onPress: () {
-                    setState(
-                      () {
-                        isvisble = !isvisble;
-                      },
-                    );
-                  },
-                ),
-              ),
-              //Todo terms
-              CheckboxListTile(
-                title: text(),
-                value: isChecked,
-                onChanged: (newValue) {
-                  setState(() {
-                    isChecked = newValue;
-                  });
-                },
-                controlAffinity: ListTileControlAffinity.leading,
-              ),
-
-              SizedBox(
-                height: 40,
-              ),
-              Button1(
-                color: colors.k_primerygreenColor,
-                text: "Register",
-                onpress: () => {
-                  print(
-                      "Email: ${emailControler.text} \n password: ${passwordControler.text} ischecked = ${isChecked}")
-                },
-              ),
-              Container(
-                margin: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.height * 0.1),
-                child: RichText(
-                  text: TextSpan(
-                    text: 'Already have an account? ',
-                    style: body2(),
-                    children: <TextSpan>[
-                      TextSpan(
-                        text: 'Login',
-                        style: TextStyle(
-                          color: colors.k_primerygreenColor,
-                          fontWeight: FontWeight.bold,
+                Container(
+                  margin: EdgeInsets.only(
+                      top: MediaQuery.of(context).size.height * 0.1),
+                  child: RichText(
+                    text: TextSpan(
+                      text: 'Already have an account? ',
+                      style: body2(),
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: 'Login',
+                          style: TextStyle(
+                            color: colors.k_primerygreenColor,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          recognizer: _recognizer,
                         ),
-                        recognizer: _recognizer,
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

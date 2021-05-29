@@ -6,24 +6,10 @@ class TermScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final colors = Appcolor();
     return Scaffold(
+      appBar: backAppBar(context: context, color: colors.k_bkColor),
       body: SafeArea(
         child: Column(
           children: [
-            Container(
-              margin: EdgeInsets.only(top: 10),
-              child: IconBtn(
-                color: colors.k_primerygreenColor,
-                icon: Icons.arrow_back,
-                onpress: () {
-                  Navigator.pop(context);
-                },
-              ),
-              padding: EdgeInsets.only(
-                  right: MediaQuery.of(context).size.width * 0.8),
-            ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.04,
-            ),
             //title
             Container(
               margin: EdgeInsets.only(

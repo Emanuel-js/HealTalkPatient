@@ -5,7 +5,7 @@ class BuildText extends StatelessWidget {
   BuildText({
     this.isvisble,
     this.iconPrifix,
-    this.iconSufix,
+    this.iconSufix = "",
     this.lebel,
     this.controler,
     this.onPress,
