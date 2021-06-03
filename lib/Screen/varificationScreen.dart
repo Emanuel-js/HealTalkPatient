@@ -71,7 +71,8 @@ class _VerificationScreenState extends State<VerificationScreen> {
                       color: colors.k_primerygreenColor,
                       text: "Varify",
                       onpress: () {
-                        Navigator.push(context, createRoute(HomeScreen1()));
+                        Navigator.push(
+                            context, createRoute(HomeScreen1(), context));
                       },
                     ),
                   )

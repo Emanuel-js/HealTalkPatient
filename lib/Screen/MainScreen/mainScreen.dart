@@ -84,16 +84,16 @@ class _MainScreenState extends State<MainScreen> {
                           Navigator.push(
                             context,
                             createRoute(
-                              DetailScreen(
-                                name: doctor[index].name,
-                                detail: doctor[index].detail,
-                                img: doctor[index].img,
-                                rate: doctor[index].rate,
-                                id: index,
-                                disc: doctor[index].disc,
-                                expriance: doctor[index].expriance,
-                              ),
-                            ),
+                                DetailScreen(
+                                  name: doctor[index].name,
+                                  detail: doctor[index].detail,
+                                  img: doctor[index].img,
+                                  rate: doctor[index].rate,
+                                  id: index,
+                                  disc: doctor[index].disc,
+                                  expriance: doctor[index].expriance,
+                                ),
+                                context),
                           );
                         },
                       );

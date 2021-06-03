@@ -57,7 +57,8 @@ class _SideMenuState extends State<SideMenu> {
                   icon: Icons.feedback,
                   text: "FeedBack",
                   ontab: () {
-                    Navigator.push(context, createRoute(FeedBackScreen()));
+                    Navigator.push(
+                        context, createRoute(FeedBackScreen(), context));
                   }),
               Container(
                 margin: EdgeInsets.only(

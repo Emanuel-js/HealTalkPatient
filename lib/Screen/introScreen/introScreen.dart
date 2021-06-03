@@ -8,29 +8,27 @@ class IntroScreen1 extends StatelessWidget {
     final colors = Appcolor();
 
     return SafeArea(
-      child: Expanded(
-        child: Column(
-          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: Column(
+        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
-          children: [
-            Intropages(
-                con: context,
-                size: size,
-                title: "Welcome To Heal Talk",
-                disc: "We hope you get the best expriance here",
-                img: "asset/img/Happy Bunch Standing.png"),
-            OutlineButton1(
-              color: colors.k_primerygreenColor,
-              text: "Next",
-              onpress: () {
-                Navigator.push(context, createRoute(IntroScreen2()));
-              },
-            ),
-            SizedBox(
-              height: 20,
-            )
-          ],
-        ),
+        children: [
+          Intropages(
+              con: context,
+              size: size,
+              title: "Welcome To Heal Talk",
+              disc: "We hope you get the best expriance here",
+              img: "asset/img/Happy Bunch Standing.png"),
+          OutlineButton1(
+            color: colors.k_primerygreenColor,
+            text: "Next",
+            onpress: () {
+              Navigator.push(context, createRoute(IntroScreen2(), context));
+            },
+          ),
+          SizedBox(
+            height: 20,
+          )
+        ],
       ),
     );
   }
@@ -44,8 +42,7 @@ class IntroScreen2 extends StatelessWidget {
     return Scaffold(
       body: Container(
         color: colors.k_bkColor,
-        child: Expanded(
-            child: Column(children: [
+        child: Column(children: [
           Intropages(
               size: size,
               con: context,
@@ -70,7 +67,7 @@ class IntroScreen2 extends StatelessWidget {
                 color: colors.k_primerygreenColor,
                 text: "Next",
                 onpress: () {
-                  Navigator.push(context, createRoute(IntroScreen3()));
+                  Navigator.push(context, createRoute(IntroScreen3(), context));
                 },
               ),
             ],
@@ -78,7 +75,7 @@ class IntroScreen2 extends StatelessWidget {
           SizedBox(
             height: 20,
           )
-        ])),
+        ]),
       ),
     );
   }
@@ -120,7 +117,8 @@ class IntroScreen3 extends StatelessWidget {
                   color: colors.k_primerygreenColor,
                   text: "Done",
                   onpress: () {
-                    Navigator.push(context, createRoute(FirstScreen()));
+                    Navigator.push(
+                        context, createRoute(FirstScreen(), context));
                   },
                 ),
               ],

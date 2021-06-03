@@ -28,7 +28,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
     TapGestureRecognizer _recognizer = TapGestureRecognizer()
       ..onTap = () {
-        Navigator.push(context, createRoute(LoginScreen()));
+        Navigator.push(context, createRoute(LoginScreen(), context));
       };
     return Scaffold(
       appBar: backAppBar(context: context, color: colors.k_white),
@@ -119,7 +119,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   color: colors.k_primerygreenColor,
                   text: "Register",
                   onpress: () => {
-                    Navigator.push(context, createRoute(VerificationScreen())),
+                    Navigator.push(
+                        context, createRoute(VerificationScreen(), context)),
                     print(
                         "Email: ${emailControler.text} \n password: ${passwordControler.text} ischecked = ${isChecked}")
                   },
@@ -156,7 +157,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     final colors = Appcolor();
     TapGestureRecognizer _recognizer = TapGestureRecognizer()
       ..onTap = () {
-        Navigator.push(context, createRoute(TermScreen()));
+        Navigator.push(context, createRoute(TermScreen(), context));
       };
     return RichText(
       text: TextSpan(
