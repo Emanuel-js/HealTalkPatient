@@ -11,7 +11,7 @@ Widget backAppBar({BuildContext context, Color color, isside = false}) {
       icon: Icons.arrow_back_ios,
       onpress: () {
         isside
-            ? Navigator.push(context, createRoute(MainScreen(), context))
+            ? Navigator.push(context, createRoute(MainScreen()))
             : Navigator.pop(context);
       },
     ),

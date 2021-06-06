@@ -1,14 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:healTalkpatient/Screen/MainScreen/detailScreen.dart';
-import 'package:healTalkpatient/data/doctordata.dart';
+import 'package:healTalkpatient/Service/doctordata.dart';
 import 'package:healTalkpatient/index.dart';
 
-class MainScreen extends StatefulWidget {
-  @override
-  _MainScreenState createState() => _MainScreenState();
-}
-
-class _MainScreenState extends State<MainScreen> {
+class MainScreen extends StatelessWidget {
   bool isrequsest = false;
 
   List<Doctor> doctor = [
@@ -20,7 +14,7 @@ class _MainScreenState extends State<MainScreen> {
         focus: "hffj",
         gender: "M",
         rate: "4.3",
-        img: "https://i.pravatar.cc/300",
+        img: "asset/img/pic.jpg",
         disc: "15 years in practice",
         id: 0),
     Doctor(
@@ -32,7 +26,7 @@ class _MainScreenState extends State<MainScreen> {
         gender: "M",
         rate: "4.3",
         disc: "15 years in practice",
-        img: "https://i.pravatar.cc/300",
+        img: "asset/img/pic.jpg",
         id: 1),
     Doctor(
         name: "DR. Yeheyes Melaku",
@@ -43,7 +37,7 @@ class _MainScreenState extends State<MainScreen> {
         gender: "M",
         rate: "4.3",
         disc: "15 years in practice",
-        img: "https://i.pravatar.cc/300",
+        img: "asset/img/pic.jpg",
         id: 2),
   ];
 
@@ -84,16 +78,16 @@ class _MainScreenState extends State<MainScreen> {
                           Navigator.push(
                             context,
                             createRoute(
-                                DetailScreen(
-                                  name: doctor[index].name,
-                                  detail: doctor[index].detail,
-                                  img: doctor[index].img,
-                                  rate: doctor[index].rate,
-                                  id: index,
-                                  disc: doctor[index].disc,
-                                  expriance: doctor[index].expriance,
-                                ),
-                                context),
+                              DetailScreen(
+                                name: doctor[index].name,
+                                detail: doctor[index].detail,
+                                img: doctor[index].img,
+                                rate: doctor[index].rate,
+                                id: index,
+                                disc: doctor[index].disc,
+                                expriance: doctor[index].expriance,
+                              ),
+                            ),
                           );
                         },
                       );
@@ -111,9 +105,9 @@ class _MainScreenState extends State<MainScreen> {
       color: colors.k_primerygreenColor,
       text: "Request",
       onpress: () {
-        setState(() {
-          isrequsest = true;
-        });
+        // setState(() {
+        //   isrequsest = true;
+        // });
         _showDialog(context, id, index);
         // controleRequest(context, id, index);
       },
@@ -150,20 +144,20 @@ class _MainScreenState extends State<MainScreen> {
               TextButton(
                 onPressed: () {
                   Navigator.pop(context, 'No');
-                  setState(() {
-                    isrequsest = false;
-                    // notrequest = false;
-                  });
+                  // setState(() {
+                  //   isrequsest = false;
+                  //   // notrequest = false;
+                  // });
                 },
                 child: const Text('yes'),
               ),
               TextButton(
                 onPressed: () => {
                   Navigator.pop(context, 'No'),
-                  setState(() {
-                    isrequsest = true;
-                    // notrequest = true;
-                  })
+                  // setState(() {
+                  //   isrequsest = true;
+                  //   // notrequest = true;
+                  // })
                 },
                 child: const Text('No'),
               ),
@@ -184,9 +178,9 @@ class _MainScreenState extends State<MainScreen> {
             content: GestureDetector(
               onTap: () {
                 Navigator.pop(context, 'No');
-                setState(() {
-                  _rejectRequest(context);
-                });
+                // setState(() {
+                //   _rejectRequest(context);
+                // });
               },
               child: Container(
                 height: 200,

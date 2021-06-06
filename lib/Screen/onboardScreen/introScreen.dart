@@ -7,28 +7,34 @@ class IntroScreen1 extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     final colors = Appcolor();
 
-    return SafeArea(
-      child: Column(
-        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Scaffold(
+      body: SafeArea(
+        child: Column(
+          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
-        children: [
-          Intropages(
-              con: context,
-              size: size,
-              title: "Welcome To Heal Talk",
-              disc: "We hope you get the best expriance here",
-              img: "asset/img/Happy Bunch Standing.png"),
-          OutlineButton1(
-            color: colors.k_primerygreenColor,
-            text: "Next",
-            onpress: () {
-              Navigator.push(context, createRoute(IntroScreen2(), context));
-            },
-          ),
-          SizedBox(
-            height: 20,
-          )
-        ],
+          children: [
+            Intropages(
+                con: context,
+                size: size,
+                title: "Welcome To Heal Talk",
+                disc: "We hope you get the best expriance here",
+                img: "asset/img/Happy Bunch Standing.png"),
+            OutlineButton1(
+              color: colors.k_primerygreenColor,
+              text: "Next",
+              onpress: () {
+                Navigator.push(
+                    context,
+                    createRoute(
+                      IntroScreen2(),
+                    ));
+              },
+            ),
+            SizedBox(
+              height: 20,
+            )
+          ],
+        ),
       ),
     );
   }
@@ -67,7 +73,11 @@ class IntroScreen2 extends StatelessWidget {
                 color: colors.k_primerygreenColor,
                 text: "Next",
                 onpress: () {
-                  Navigator.push(context, createRoute(IntroScreen3(), context));
+                  Navigator.push(
+                      context,
+                      createRoute(
+                        IntroScreen3(),
+                      ));
                 },
               ),
             ],
@@ -118,7 +128,10 @@ class IntroScreen3 extends StatelessWidget {
                   text: "Done",
                   onpress: () {
                     Navigator.push(
-                        context, createRoute(FirstScreen(), context));
+                        context,
+                        createRoute(
+                          FirstScreen(),
+                        ));
                   },
                 ),
               ],

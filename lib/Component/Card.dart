@@ -36,13 +36,10 @@ class Cards extends StatelessWidget {
             Container(
               padding: padding,
               child: ListTile(
-                leading: CircleAvatar(
-                  backgroundColor: colors.k_white,
-                  child: Hero(
-                    tag: "profile-${id}",
-                    child: CircleAvatar(
-                      backgroundImage: NetworkImage(profile),
-                    ),
+                leading: Hero(
+                  tag: "profile-${id}",
+                  child: CircleAvatar(
+                    backgroundImage: AssetImage(profile),
                   ),
                 ),
                 title: Text(

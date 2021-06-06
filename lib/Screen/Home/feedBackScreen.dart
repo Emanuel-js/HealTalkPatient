@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../index.dart';
+import '../../index.dart';
 
 class FeedBackScreen extends StatelessWidget {
   @override
@@ -8,8 +8,7 @@ class FeedBackScreen extends StatelessWidget {
     final commentControler = TextEditingController();
 
     return Scaffold(
-      appBar:
-          backAppBar(context: context, color: colors.k_bkColor, isside: true),
+      appBar: backAppBar(context: context, color: colors.k_bkColor),
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -35,12 +34,14 @@ class FeedBackScreen extends StatelessWidget {
             SizedBox(
               height: 20,
             ),
-            Button1(
-                text: "Send",
-                color: colors.k_seconderypurpleColor,
-                onpress: () {
-                  _showDialog(context);
-                })
+            Container(
+              child: Button1(
+                  text: "Send",
+                  color: colors.k_seconderypurpleColor,
+                  onpress: () {
+                    _showDialog(context);
+                  }),
+            )
           ],
         ),
       ),

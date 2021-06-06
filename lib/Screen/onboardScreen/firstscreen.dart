@@ -39,7 +39,10 @@ class FirstScreen extends StatelessWidget {
                   color: colors.k_primerygreenColor,
                   onpress: () {
                     Navigator.push(
-                        context, createRoute(RegisterScreen(), context));
+                        context,
+                        createRoute(
+                          RegisterScreen(),
+                        ));
                   },
                 ),
 
@@ -49,7 +52,10 @@ class FirstScreen extends StatelessWidget {
                   color: colors.k_primerygreenColor,
                   onpress: () {
                     Navigator.push(
-                        context, createRoute(LoginScreen(), context));
+                        context,
+                        createRoute(
+                          LoginScreen(),
+                        ));
                   },
                 )
               ],

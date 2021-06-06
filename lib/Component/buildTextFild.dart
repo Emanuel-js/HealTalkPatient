@@ -21,12 +21,13 @@ class BuildText extends StatelessWidget {
   final onPress;
   final keybordType;
   final ispassword;
+
   final colors = Appcolor();
   @override
   Widget build(BuildContext context) {
     return Container(
         width: MediaQuery.of(context).size.width * 0.9,
-        child: TextField(
+        child: TextFormField(
           controller: controler,
           decoration: InputDecoration(
               filled: true,

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-Route createRoute(Widget screen, context) {
+Route createRoute(Widget screen) {
   return PageRouteBuilder(
       transitionDuration: Duration(milliseconds: 700),
       transitionsBuilder: (context, animation, animationTime, child) {
         animation =
-            CurvedAnimation(parent: animation, curve: Curves.elasticInOut);
+            CurvedAnimation(parent: animation, curve: Curves.elasticOut);
         return ScaleTransition(
             scale: animation, alignment: Alignment.center, child: child);
       },

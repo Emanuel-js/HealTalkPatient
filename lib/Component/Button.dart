@@ -119,7 +119,7 @@ class CheckBox1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CheckboxListTile(
-      title: Text(title),
+      title: title,
       value: isChecked,
       checkColor: colors.k_white,
       onChanged: (value) {

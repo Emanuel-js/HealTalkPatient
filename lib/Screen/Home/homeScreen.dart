@@ -12,7 +12,11 @@ class _HomeScreen1State extends State<HomeScreen1> {
   final colors = Appcolor();
   final hasnotification = true;
   int page = 0;
-  List<Widget> listWidgets = [MainScreen(), ChatScreen(), HistoryChatScreen()];
+  List<Widget> listWidgets = [
+    MainScreen(),
+    MessageScreen(),
+    HistoryChatScreen()
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,7 +53,8 @@ class _HomeScreen1State extends State<HomeScreen1> {
           color: colors.k_primerygreenColor,
           backgroundColor: colors.k_white,
           activeColor: colors.k_primerygreenColor,
-          // style: TabStyle.fixedCircle,
+
+          // style: TabStyle.titled,
           items: [
             TabItem(icon: Icons.home, title: 'Home'),
             TabItem(icon: Icons.message, title: 'chat'),

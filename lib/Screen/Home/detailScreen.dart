@@ -40,15 +40,11 @@ class DetailScreen extends StatelessWidget {
 
               Center(
                   // Todo profile image
-                  child: CircleAvatar(
-                radius: 92,
-                backgroundColor: colors.k_white,
-                child: Hero(
-                  tag: "profile-${id}",
-                  child: CircleAvatar(
-                    radius: 90,
-                    backgroundImage: NetworkImage(img),
-                  ),
+                  child: Hero(
+                tag: "profile-${id}",
+                child: CircleAvatar(
+                  radius: 90,
+                  backgroundImage: AssetImage(img),
                 ),
               )),
               //todo name

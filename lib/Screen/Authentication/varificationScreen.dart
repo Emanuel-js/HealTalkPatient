@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
-import '../index.dart';
+import '../../../index.dart';
 
-class VerificationScreen extends StatefulWidget {
-  @override
-  _VerificationScreenState createState() => _VerificationScreenState();
-}
-
-class _VerificationScreenState extends State<VerificationScreen> {
+class VerificationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final varificationControler = TextEditingController();
@@ -72,7 +67,10 @@ class _VerificationScreenState extends State<VerificationScreen> {
                       text: "Varify",
                       onpress: () {
                         Navigator.push(
-                            context, createRoute(HomeScreen1(), context));
+                            context,
+                            createRoute(
+                              HomeScreen1(),
+                            ));
                       },
                     ),
                   )
