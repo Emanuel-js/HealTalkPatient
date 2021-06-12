@@ -117,23 +117,25 @@ class _LoginScreenState extends State<LoginScreen> {
         DisplayMsg(msg: "Error ${err.toString()}", context: context);
       }))
           .user;
+
       if (newUser != null) {
-        userRef.child(newUser.uid).once().then((value) => (DataSnapshot snap) {
-              if (snap.value != null) {
-                Navigator.push(context, createRoute(VerificationScreen()));
-                DisplayMsg().displayMessage("Welcome Back", context);
-              } else {
-                _firebaseAuth.signOut();
-                DisplayMsg().displayMessage("No recorde exist!", context);
-              }
-            });
+        // userRef.child(newUser.uid).once().then((value) => (DataSnapshot snap) {
+        //       if (snap.value != null) {
+        Navigator.push(context, createRoute(HomeScreen1()));
+        DisplayMsg().displayMessage("Welcome Back", context);
+        //   print("welcome");
+        // } else {
+        //     _firebaseAuth.signOut();
+
+        // DisplayMsg().displayMessage("No recorde exist!", context);
+
       } else {
-        DisplayMsg()
-            .displayMessage("Error occourd you can't sign in!", context);
+        DisplayMsg().displayMessage(
+            "The Email is not Registered! please Register First", context);
       }
     } catch (e) {
       DisplayMsg().displayMessage(
-          "The Email is not Registered! please Register First", context);
+          "Please Enter The Correct Email or Password!", context);
     }
   }
 

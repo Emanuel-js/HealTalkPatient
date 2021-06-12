@@ -130,5 +130,3 @@ class _SideMenuState extends State<SideMenu> {
     );
   }
 }
-
-class _firebaseAuth {}

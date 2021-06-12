@@ -1,7 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 
 import 'index.dart';
@@ -20,8 +21,22 @@ Future<void> main() async {
 DatabaseReference userRef =
     FirebaseDatabase.instance.reference().child("users");
 
-class HealTalk extends StatelessWidget {
+class HealTalk extends StatefulWidget {
   // This widget is the root of your application.
+  @override
+  _HealTalkState createState() => _HealTalkState();
+}
+
+class _HealTalkState extends State<HealTalk> {
+  final auth = FirebaseAuth.instance;
+  User users;
+  @override
+  void initState() {
+    User users = auth.currentUser;
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     bool islogin = false;
@@ -30,6 +45,8 @@ class HealTalk extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         home: initScreen == 0 || initScreen == null
             ? IntroScreen1()
-            : FirstScreen());
+            : users == null
+                ? FirstScreen()
+                : HomeScreen1());
   }
 }
