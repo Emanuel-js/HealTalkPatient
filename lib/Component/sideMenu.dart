@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:healTalkpatient/Screen/Profile/profileScreen.dart';
 import 'package:lite_rolling_switch/lite_rolling_switch.dart';
 import '../index.dart';
 
@@ -32,7 +33,9 @@ class _SideMenuState extends State<SideMenu> {
                   buildMenuItem(
                     icon: Icons.person,
                     text: "Profile",
-                    ontab: () {},
+                    ontab: () {
+                      Navigator.push(context, createRoute(ProfileScreen()));
+                    },
                   ),
                   buildMenuItem(
                       icon: Icons.history,
@@ -73,8 +76,9 @@ class _SideMenuState extends State<SideMenu> {
                 color: colors.k_redColor,
                 onpress: () {
                   // log out
-                  FirebaseAuth.instance.signOut();
-                  Navigator.push(context, createRoute(LoginScreen()));
+                  AuthControlle().logout().then((value) =>
+                      Navigator.pushReplacement(
+                          context, createRoute(FirstScreen())));
                 },
               ),
               Column(

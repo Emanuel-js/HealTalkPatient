@@ -26,8 +26,9 @@ dependencies:
   
   shared_preferences: ^2.0.6
 
-  
-  provider: ^5.0.0
+  gender_picker: ^1.1.0
+  get: ^4.1.4
+
 
 dev_dependencies:
   flutter_test:

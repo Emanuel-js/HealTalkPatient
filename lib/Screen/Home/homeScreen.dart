@@ -33,7 +33,9 @@ class _HomeScreen1State extends State<HomeScreen1> {
           //Todo notification
           actions: [
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(context, createRoute(NotificationScreen()));
+              },
               icon: hasnotification
                   ? Icon(
                       Icons.notifications_on,

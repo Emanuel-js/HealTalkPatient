@@ -18,10 +18,6 @@ class FeedBackScreen extends StatelessWidget {
               "asset/img/Humaaans Graphs.png",
               width: MediaQuery.of(context).size.height * 0.35,
             ),
-            // Text(
-            //   "hffff",
-            //   style: header1(),
-            // ),
             Center(
               child: BuildText(
                 controler: commentControler,

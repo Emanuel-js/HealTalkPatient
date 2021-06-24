@@ -6,7 +6,6 @@ export 'Tools/app_theme.dart';
 export 'Tools/color.dart';
 
 //export screen
-export 'Screen/wrapper.dart';
 export 'Screen/Authentication/loginScreen.dart';
 export 'Screen/onboardScreen/firstscreen.dart';
 export 'Screen/onboardScreen/introScreen.dart';
@@ -20,9 +19,11 @@ export 'Screen/Home/historyChatScreen.dart';
 export 'Screen/Home/mainScreen.dart';
 export 'Screen/Home/detailScreen.dart';
 export 'Screen/Home/feedBackScreen.dart';
+export 'Screen/Notification/notificationScreen.dart';
 //export utility
 export 'utility/createRoute.dart';
 export 'utility/displayMessageforuser.dart';
+export 'utility/progress.dart';
 //export component
 export 'Component/Button.dart';
 export 'Component/logo.dart';
@@ -39,4 +40,5 @@ export 'models/user.dart';
 
 //export service
 
-export 'Service/auth.dart';
+export 'Controller/auth.dart';
+export 'Controller/doctordata.dart';

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:healTalkpatient/Service/doctordata.dart';
 import 'package:healTalkpatient/index.dart';
 
 class MainScreen extends StatelessWidget {
