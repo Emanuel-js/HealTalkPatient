@@ -14,12 +14,13 @@ class AuthControlle {
       return true;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
-        DisplayMsg()
-            .displayMessage('The password provided is too weak.', context);
+        DisplayMsg().displayMessage(
+            msg: 'The password provided is too weak.', context: context);
         return false;
       } else if (e.code == 'email-already-in-use') {
         DisplayMsg().displayMessage(
-            'The account already exists for that email.', context);
+            msg: 'The account already exists for that email.',
+            context: context);
         return false;
       }
     } catch (e) {
@@ -45,11 +46,12 @@ class AuthControlle {
       return true;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        DisplayMsg().displayMessage('No user found for that email.', context);
+        DisplayMsg().displayMessage(
+            msg: 'No user found for that email.', context: context);
         return false;
       } else if (e.code == 'wrong-password') {
-        DisplayMsg()
-            .displayMessage('Wrong password provided for that user.', context);
+        DisplayMsg().displayMessage(
+            msg: 'Wrong password provided for that user.', context: context);
         return false;
       }
     }

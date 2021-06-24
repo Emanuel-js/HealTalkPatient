@@ -109,16 +109,18 @@ class _LoginScreenState extends State<LoginScreen> {
   void validetor(BuildContext context) async {
     // print("what");
     if (email.text.isEmpty) {
-      DisplayMsg().displayMessage("Please Enter an Email", context);
+      DisplayMsg()
+          .displayMessage(msg: "Please Enter an Email", context: context);
     } else if (!email.text.contains("@")) {
-      DisplayMsg().displayMessage("Invalid Email", context);
+      DisplayMsg().displayMessage(msg: "Invalid Email", context: context);
     } else if (password.text.isEmpty) {
-      DisplayMsg().displayMessage("Enter Password", context);
+      DisplayMsg().displayMessage(msg: "Enter Password", context: context);
     } else if (password.text.length < 6) {
-      DisplayMsg().displayMessage("Password must be > 6 character", context);
+      DisplayMsg().displayMessage(
+          msg: "Password must be > 6 character", context: context);
     } else {
       setState(() {
-        isloading = true;
+        isloading = false;
       });
       final u =
           await auth.login(email.text.trim(), password.text.trim(), context);
@@ -126,8 +128,11 @@ class _LoginScreenState extends State<LoginScreen> {
       if (u) {
         setState(() {
           isloading = false;
+          DisplayMsg().displayMessage(
+              msg: "Welcome Back", context: context, iserror: false);
+
+          Navigator.push(context, createRoute(HomeScreen1()));
         });
-        Navigator.push(context, createRoute(HomeScreen1()));
       } else {
         print("this is");
         setState(() {

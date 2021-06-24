@@ -94,7 +94,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
     print("pls varify");
     if (user.emailVerified) {
       _timer.cancel();
-      Navigator.pushReplacement(context, createRoute(Surveyscreen()));
+      Navigator.pushReplacement(context, createRoute(HomeScreen1()));
     }
   }
 

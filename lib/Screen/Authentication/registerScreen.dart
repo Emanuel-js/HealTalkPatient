@@ -231,20 +231,24 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   Future<void> validators(BuildContext context) async {
     if (email.text.isEmpty) {
-      DisplayMsg().displayMessage("Please Enter an Email", context);
+      DisplayMsg()
+          .displayMessage(msg: "Please Enter an Email", context: context);
     } else if (!email.text.contains("@")) {
-      DisplayMsg().displayMessage("Invalid Email", context);
+      DisplayMsg().displayMessage(msg: "Invalid Email", context: context);
     } else if (firstName.text.length < 4 && lastName.text.length < 4) {
-      DisplayMsg().displayMessage("Name must be atlist 3 character", context);
+      DisplayMsg().displayMessage(
+          msg: "Name must be atlist 3 character", context: context);
     } else if (int.parse(age.text) < 18) {
-      DisplayMsg().displayMessage("Name must be atlist 3 character", context);
+      DisplayMsg().displayMessage(
+          msg: "Name must be atlist 3 character", context: context);
     } else if (password.text.isEmpty) {
-      DisplayMsg().displayMessage("Age must be +18", context);
+      DisplayMsg().displayMessage(msg: "Age must be +18", context: context);
     } else if (password.text.length < 6) {
-      DisplayMsg().displayMessage("Password must be > 6 character", context);
+      DisplayMsg().displayMessage(
+          msg: "Password must be > 6 character", context: context);
     } else {
       setState(() {
-        isloading = true;
+        isloading = false;
       });
       final u = await auth.regsiter(firstName.text.trim(), lastName.text.trim(),
           email.text.trim(), password.text.trim(), gender.trim(), context);
@@ -252,8 +256,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
       if (u) {
         setState(() {
           isloading = false;
+          Navigator.pushReplacement(context, createRoute(VerificationScreen()));
+          DisplayMsg().displayMessage(
+            msg: "You are Seccsessfuly registerd",
+            context: context,
+          );
         });
-        Navigator.pushReplacement(context, createRoute(VerificationScreen()));
       } else {
         setState(() {
           isloading = true;
