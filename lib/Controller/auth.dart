@@ -4,12 +4,14 @@ import '../index.dart';
 
 class AuthControlle {
   final _auth = FirebaseAuth.instance;
-  User u;
   Future regsiter<bool>(String firstName, String lastName, String email,
-      String password, String gender, BuildContext context) async {
+      String password, String gender, int age, BuildContext context) async {
     try {
       await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
+      UserData userdata = new UserData();
+      userdata.addUser(_auth.currentUser.uid, firstName, lastName, email,
+          gender, false, null, age);
 
       return true;
     } on FirebaseAuthException catch (e) {
@@ -60,5 +62,31 @@ class AuthControlle {
   Future logout<User>() async {
     _auth.signOut();
     print("user is loged out");
+  }
+
+  bool changePassword(String currentPassword, String newPassword, context) {
+    final user = FirebaseAuth.instance.currentUser;
+    bool cange = false;
+    final cred = EmailAuthProvider.credential(
+        email: user.email, password: currentPassword);
+
+    user.reauthenticateWithCredential(cred).then((value) {
+      user.updatePassword(newPassword).then((_) {
+        DisplayMsg().displayMessage(
+            msg: "password is successfully change!", context: context);
+
+        return cange = true;
+      }).catchError((error) {
+        DisplayMsg().displayMessage(
+            msg: "password is not changed please try again!", context: context);
+
+        return cange = false;
+      });
+    }).catchError((err) {
+      DisplayMsg().displayMessage(
+          msg: "your current password is not correct!", context: context);
+      return cange = false;
+    });
+    return cange;
   }
 }

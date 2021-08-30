@@ -1,21 +1,22 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+class Patient {
+  // static const ID = "id";
+  // static const NAME = "name";
+  // static const EMAIL = "email";
+  // static const PIC = "pic";
 
-class UserModel {
-  static const ID = "id";
-  static const NAME = "name";
-  static const EMAIL = "email";
-  static const PIC = "pic";
-
-  String id;
-  String name;
-  String email;
-  String pic;
-  UserModel({this.id, this.name, this.email, this.pic});
-
-  UserModel.fromSnapshot(DocumentSnapshot snapshot) {
-    // name = snapshot.data()[NAME];
-    // email = snapshot.data()[EMAIL];
-    // id = snapshot.data()[ID];
-    // pic = snapshot.data()[PIC] ?? [];
-  }
+  final String email;
+  final String firstName;
+  final int age;
+  final String lastName;
+  final String gender;
+  final bool isanonymous;
+  final String picture;
+  Patient(
+      {this.email,
+      this.firstName,
+      this.age,
+      this.lastName,
+      this.gender,
+      this.isanonymous,
+      this.picture});
 }

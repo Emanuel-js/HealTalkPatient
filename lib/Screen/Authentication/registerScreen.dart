@@ -215,8 +215,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
         onChanged: (Gender g) {
           g.index == 0 ? gender = "Male" : gender = "Female";
-
-          print(gender);
         },
         equallyAligned: true,
         animationDuration: Duration(milliseconds: 300),
@@ -239,10 +237,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
       DisplayMsg().displayMessage(
           msg: "Name must be atlist 3 character", context: context);
     } else if (int.parse(age.text) < 18) {
-      DisplayMsg().displayMessage(
-          msg: "Name must be atlist 3 character", context: context);
-    } else if (password.text.isEmpty) {
       DisplayMsg().displayMessage(msg: "Age must be +18", context: context);
+    } else if (password.text.isEmpty) {
+      DisplayMsg()
+          .displayMessage(msg: "lease insert password!", context: context);
     } else if (password.text.length < 6) {
       DisplayMsg().displayMessage(
           msg: "Password must be > 6 character", context: context);
@@ -250,8 +248,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
       setState(() {
         isloading = false;
       });
-      final u = await auth.regsiter(firstName.text.trim(), lastName.text.trim(),
-          email.text.trim(), password.text.trim(), gender.trim(), context);
+      final u = await auth.regsiter(
+          firstName.text.trim(),
+          lastName.text.trim(),
+          email.text.trim(),
+          password.text.trim(),
+          gender.trim(),
+          int.parse(age.text.trim()),
+          context);
 
       if (u) {
         setState(() {

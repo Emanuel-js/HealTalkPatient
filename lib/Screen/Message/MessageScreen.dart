@@ -1,7 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:healTalkpatient/index.dart';
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class MessageScreen extends StatelessWidget {
+  final colors = Appcolor();
   @override
   Widget build(BuildContext context) {
     return Material(
@@ -10,7 +15,7 @@ class MessageScreen extends StatelessWidget {
         margin: EdgeInsets.all(10),
         padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: colors.k_primerygreenColor,
           borderRadius: BorderRadius.circular(20),
         ),
         child: ListTile(
@@ -26,7 +31,11 @@ class MessageScreen extends StatelessWidget {
           ),
           title: Text(
             "Amanuel Awol",
-            textAlign: TextAlign.center,
+            style: header2(color: colors.k_white),
+          ),
+          subtitle: Text(
+            "bla bal",
+            style: body2(color: colors.k_white),
           ),
         ),
       ),
@@ -34,16 +43,19 @@ class MessageScreen extends StatelessWidget {
   }
 }
 
+// chat aria
 class ChatScreen extends StatelessWidget {
+  final colors = Appcolor();
+  final messge = TextEditingController();
+  final _auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
-    final colors = Appcolor();
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: colors.k_bkColor,
+          backgroundColor: colors.k_primerygreenColor,
           leading: Container(
             child: IconBtn(
-              color: colors.k_primerygreenColor,
+              color: colors.k_seconderypurpleColor,
               icon: Icons.arrow_back_ios,
               onpress: () {
                 Navigator.pop(context);
@@ -98,7 +110,67 @@ class ChatScreen extends StatelessWidget {
             )
           ],
         ),
-        body: Container(child: Text("wow")));
+        body: StreamBuilder<QuerySnapshot>(
+          stream: MessageControler()
+              .messageCollection
+              .doc()
+              .collection("message")
+              .snapshots(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              final chat = snapshot.data.docs;
+              return Stack(
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(bottom: 65),
+                    child: CahtList(snapshot: chat),
+                  ),
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Container(
+                      width: double.infinity,
+                      child: TextFormField(
+                        controller: messge,
+                        decoration: InputDecoration(
+                          fillColor: colors.k_gray,
+                          suffixIcon: IconBtn(
+                            onpress: () {
+                              sendMessage(context);
+                            },
+                            icon: Icons.send,
+                            color: colors.k_seconderypurpleColor,
+                          ),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(30.0),
+                                topRight: Radius.circular(30.0)),
+                          ),
+                          hintText: 'Send message..',
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              );
+            }
+            return Text("laoding.....");
+          },
+        ));
+  }
+
+  sendMessage(context) {
+    final now = new DateTime.now();
+    final dt = DateTime(now.year, now.month, now.day, now.hour, now.minute);
+    final format = DateFormat.jm();
+    String date = format.format(dt);
+
+    if (messge.text.isEmpty) {
+      DisplayMsg()
+          .displayMessage(msg: "please insert message", context: context);
+    }
+    MessageControler().sendMessages(messge.text.trim(), "", date);
+    messge.clear();
+    // MessageControler().messageStream();
   }
 
 //   void selectactions(ch) {
