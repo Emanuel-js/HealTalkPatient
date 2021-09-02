@@ -1,10 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:firebase_database/firebase_database.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-
 import 'index.dart';
 
 int initScreen;
@@ -21,18 +19,34 @@ Future<void> main() async {
 final auth = FirebaseAuth.instance;
 final userCur = auth.currentUser;
 
-DatabaseReference userRef =
-    FirebaseDatabase.instance.reference().child("Users");
-
 class HealTalk extends StatelessWidget {
   // This widget is the root of your application.
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        theme: AppTheme.define(),
-        debugShowCheckedModeBanner: false,
-        home: pageControll());
+    return MultiProvider(
+        providers: [
+          StreamProvider<Patient>(
+            create: (_) => FirebaseApi().patient,
+            initialData: null,
+          ),
+          StreamProvider<List<Doctor>>(
+            create: (_) => DoctorData().getdoctor(),
+            initialData: null,
+          ),
+          StreamProvider<Request>(
+            create: (_) => RequestApi().request,
+            initialData: null,
+          ),
+          StreamProvider<List<Message>>(
+            create: (_) => FirebaseApi().getMessagesfromuser(),
+            initialData: null,
+          ),
+        ],
+        child: MaterialApp(
+            theme: AppTheme.define(),
+            debugShowCheckedModeBanner: false,
+            home: pageControll()));
   }
 
   Widget pageControll() {

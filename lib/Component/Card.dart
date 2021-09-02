@@ -2,27 +2,12 @@ import 'package:flutter/material.dart';
 import '../index.dart';
 
 class Cards extends StatelessWidget {
-  Cards(
-      {@required this.name,
-      @required this.disc,
-      @required this.profile,
-      @required this.rate,
-      @required this.onDetail,
-      this.btn,
-      this.id,
-      this.color,
-      this.isrequest});
-
-  final name;
-  final disc;
-  final profile;
-  final rate;
+  final Doctor data;
   final onDetail;
-  Widget btn;
-
-  final id;
-  final isrequest;
+  final btn;
   final color;
+  Cards({this.data, @required this.onDetail, this.btn, this.color});
+
   @override
   Widget build(BuildContext context) {
     final colors = Appcolor();
@@ -37,16 +22,16 @@ class Cards extends StatelessWidget {
               padding: padding,
               child: ListTile(
                 leading: Hero(
-                  tag: "profile-${id}",
+                  tag: "profile-${data.dId}",
                   child: CircleAvatar(
-                    backgroundImage: AssetImage(profile),
+                    backgroundImage: NetworkImage(data.img),
                   ),
                 ),
                 title: Text(
-                  name,
+                  data.fullName,
                   style: header2(),
                 ),
-                subtitle: Text(disc),
+                subtitle: Text(data.detail),
               ),
             ),
             Row(
@@ -73,7 +58,7 @@ class Cards extends StatelessWidget {
                   padding: EdgeInsets.only(left: 10),
                 ),
                 Text(
-                  rate,
+                  data.rate,
                   style: TextStyle(color: colors.k_seconderypurpleColor),
                   // style: body2(color: colors.k_seconderypurpleColor),
                 ),

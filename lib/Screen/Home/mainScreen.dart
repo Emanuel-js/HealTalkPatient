@@ -1,204 +1,156 @@
 import 'package:flutter/material.dart';
 import 'package:healTalkpatient/index.dart';
+import 'package:provider/provider.dart';
 
-class MainScreen extends StatelessWidget {
+class MainScreen extends StatefulWidget {
+  @override
+  _MainScreenState createState() => _MainScreenState();
+}
+
+class _MainScreenState extends State<MainScreen> {
   bool isrequsest = false;
-
-  List<Doctor> doctor = [
-    Doctor(
-        name: "DR. Natnael Tassew",
-        detail:
-            "psychologist and physician lsorempsychologist andphysician lsorem",
-        expriance: "Expriance",
-        focus: "hffj",
-        gender: "M",
-        rate: "4.3",
-        img: "asset/img/pic.jpg",
-        disc: "15 years in practice",
-        id: 0),
-    Doctor(
-        name: "DR. Amanuel Awol",
-        detail:
-            "psychologist and physician lsorempsychologist andphysician lsorem",
-        expriance: "Expriance",
-        focus: "hffj",
-        gender: "M",
-        rate: "4.3",
-        disc: "15 years in practice",
-        img: "asset/img/pic.jpg",
-        id: 1),
-    Doctor(
-        name: "DR. Yeheyes Melaku",
-        detail:
-            "psychologist and physician lsorempsychologist andphysician lsorem",
-        expriance: "Expriance",
-        focus: "hffj",
-        gender: "M",
-        rate: "4.3",
-        disc: "15 years in practice",
-        img: "asset/img/pic.jpg",
-        id: 2),
-  ];
 
   @override
   Widget build(BuildContext context) {
     final colors = Appcolor();
-
+    // final data = Provider.of<List<Doctor>>(context);
     return Scaffold(
-      body: Container(
-        child: Column(
-          children: [
-            SizedBox(
-              height: 20,
+      body: StreamBuilder<List<Doctor>>(
+        stream: DoctorData().getdoctor(),
+        builder: (ctx, snapshot) {
+          print(snapshot?.data);
+          if (!snapshot.hasData) return CustomProgress().progress();
+          final data = snapshot.data;
+
+          return Container(
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 20,
+                ),
+                Text(
+                  "Based on your criteria , these are the best matches for you",
+                  style: body1(),
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                Expanded(
+                    child: data == null
+                        ? Text("no data")
+                        : ListView.builder(
+                            itemCount: data?.length,
+                            itemBuilder: (context, index) {
+                              return Cards(
+                                data: data[index],
+                                color: isrequsest
+                                    ? colors.k_redColor
+                                    : colors.k_primerygreenColor,
+                                btn: dynmaicBtn(context, data[index].dId),
+                                onDetail: () {
+                                  Navigator.push(
+                                    context,
+                                    createRoute(
+                                      DetailScreen(data: data[index]),
+                                    ),
+                                  );
+                                },
+                              );
+                            }))
+              ],
             ),
-            Text(
-              "Based on your criteria , these are the best matches for you",
-              style: body1(),
-              textAlign: TextAlign.center,
-            ),
-            SizedBox(
-              height: 30,
-            ),
-            Expanded(
-                child: ListView.builder(
-                    itemCount: 3,
-                    itemBuilder: (context, index) {
-                      return Cards(
-                        name: doctor[index].name,
-                        disc: doctor[index].detail,
-                        profile: doctor[index].img,
-                        rate: doctor[index].rate,
-                        id: index,
-                        // color: isrequsest
-                        //     ? colors.k_redColor
-                        //     : colors.k_primerygreenColor,
-                        btn: dynmaicBtn(context, index, doctor[index].id),
-                        onDetail: () {
-                          Navigator.push(
-                            context,
-                            createRoute(
-                              DetailScreen(
-                                name: doctor[index].name,
-                                detail: doctor[index].detail,
-                                img: doctor[index].img,
-                                rate: doctor[index].rate,
-                                id: index,
-                                disc: doctor[index].disc,
-                                expriance: doctor[index].expriance,
-                              ),
-                            ),
-                          );
-                        },
-                      );
-                    }))
-          ],
-        ),
+          );
+        },
       ),
     );
   }
 
-  Widget dynmaicBtn(BuildContext context, int index, int id) {
+  Widget dynmaicBtn(BuildContext context, String id) {
     final colors = Appcolor();
-    // print("indx= ${index}\n id = ${id}");
-    return Button2(
-      color: colors.k_primerygreenColor,
-      text: "Request",
-      onpress: () {
-        // setState(() {
-        //   isrequsest = true;
-        // });
-        _showDialog(context, id, index);
-        // controleRequest(context, id, index);
-      },
-    );
-    // Button2(
-    //     color: colors.k_redColor,
-    //     text: "Cancel",
-    //     onpress: () {
-    //       _rejectRequest(context);
-    //     },
-    //   )
-  }
-
-  Widget controleRequest(BuildContext context, int id, int index) {
-    final colors = Appcolor();
-    if (id == index) {
+    final request = Provider.of<Request>(context);
+    print(request);
+    if (request == null)
       return Button2(
-        color: colors.k_redColor,
-        text: "Cancel",
+        color: colors.k_primerygreenColor,
+        text: "Request",
         onpress: () {
-          _rejectRequest(context);
+          showAlertDialog(
+              context, "Are you Sure?", "Continu to Request A doctor", id);
+        },
+      );
+
+    if (request.state == true && request.reqReciverId == id) {
+      return Button1(
+          text: "waiting doctor",
+          color: colors.k_gray2,
+          onpress: () {
+            Navigator.push(context, createRoute(WaitScreen()));
+          });
+    } else {
+      return Button2(
+        color: colors.k_primerygreenColor,
+        text: "Request",
+        onpress: () {
+          showAlertDialog(
+              context, "Are you Sure?", "Continu to Request A doctor", id);
         },
       );
     }
   }
 
-  void _rejectRequest(BuildContext context) {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: const Text('Do you Want to cancel the request?'),
-            actions: <Widget>[
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(context, 'No');
-                  // setState(() {
-                  //   isrequsest = false;
-                  //   // notrequest = false;
-                  // });
-                },
-                child: const Text('yes'),
-              ),
-              TextButton(
-                onPressed: () => {
-                  Navigator.pop(context, 'No'),
-                  // setState(() {
-                  //   isrequsest = true;
-                  //   // notrequest = true;
-                  // })
-                },
-                child: const Text('No'),
-              ),
-            ],
-          );
-        });
+  _handelRequest(String id) {
+    // final request = Provider.of<Request>(context);
+
+    setState(() {
+      if (isrequsest) {
+        RequestApi().sendRequest(isrequsest, id);
+        Navigator.pushReplacement(context, createRoute(WaitScreen()));
+      }
+    });
   }
 
-  void _showDialog(BuildContext context, int id, int index) {
+  showAlertDialog(BuildContext context, String title, String disc, String id) {
+    // set up the buttons
+    final colors = Appcolor();
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      backgroundColor: colors.k_primerygreenColor,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+      title: Text(title,
+          style: header2(
+            color: colors.k_white,
+          )),
+      content: Text(disc,
+          style: body1(
+            color: colors.k_white,
+          )),
+      actions: [
+        Button1(
+          text: "Cancel",
+          color: Colors.red,
+          onpress: () {
+            isrequsest = false;
+            Navigator.pop(context);
+          },
+        ),
+        Button1(
+          color: Colors.blueGrey,
+          text: "Continue",
+          onpress: () {
+            isrequsest = true;
+            _handelRequest(id);
+            // print("ppp");
+          },
+        ),
+      ],
+    );
+
+    // show the dialog
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return AlertDialog(
-            backgroundColor: Colors.green,
-            elevation: 0,
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-            content: GestureDetector(
-              onTap: () {
-                Navigator.pop(context, 'No');
-                // setState(() {
-                //   _rejectRequest(context);
-                // });
-              },
-              child: Container(
-                height: 200,
-                child: Column(children: [
-                  CircleAvatar(
-                    radius: 50,
-                    backgroundImage: AssetImage("asset/img/check-circle.gif"),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    "congrats you selected your doctor",
-                    style: body1(color: Colors.white),
-                    textAlign: TextAlign.center,
-                  ),
-                ]),
-              ),
-            ));
+        return alert;
       },
     );
   }

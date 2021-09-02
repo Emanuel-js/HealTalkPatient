@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:healTalkpatient/Screen/Survey/surveyScreen.dart';
 import '../../../index.dart';
 
 class VerificationScreen extends StatefulWidget {

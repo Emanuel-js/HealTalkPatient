@@ -9,9 +9,9 @@ class AuthControlle {
     try {
       await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
-      UserData userdata = new UserData();
-      userdata.addUser(_auth.currentUser.uid, firstName, lastName, email,
-          gender, false, null, age);
+
+      FirebaseApi().addPatient(_auth.currentUser.uid, firstName, lastName,
+          email, gender, false, null, age);
 
       return true;
     } on FirebaseAuthException catch (e) {

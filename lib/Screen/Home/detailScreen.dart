@@ -3,25 +3,9 @@ import '../../index.dart';
 
 class DetailScreen extends StatelessWidget {
   final colors = Appcolor();
-  final name;
-  final gender;
-  final expriance;
-  final rate;
-  final focus;
-  final detail;
-  final id;
-  final img;
-  final disc;
-  DetailScreen(
-      {this.name,
-      this.gender,
-      this.expriance,
-      this.rate,
-      this.focus,
-      this.detail,
-      this.img,
-      this.disc,
-      this.id});
+  final Doctor data;
+
+  DetailScreen({this.data});
 
   @override
   Widget build(BuildContext context) {
@@ -41,10 +25,10 @@ class DetailScreen extends StatelessWidget {
               Center(
                   // Todo profile image
                   child: Hero(
-                tag: "profile-${id}",
+                tag: "profile-${data.dId}",
                 child: CircleAvatar(
                   radius: 90,
-                  backgroundImage: AssetImage(img),
+                  backgroundImage: NetworkImage(data.img),
                 ),
               )),
               //todo name
@@ -52,7 +36,7 @@ class DetailScreen extends StatelessWidget {
                 height: 30,
               ),
               Text(
-                name,
+                data.fullName,
                 style: header1(),
                 textAlign: TextAlign.center,
               ),
@@ -60,7 +44,7 @@ class DetailScreen extends StatelessWidget {
                 height: 30,
               ),
               Text(
-                detail,
+                data.detail,
                 style: body1(),
                 textAlign: TextAlign.center,
               ),
@@ -73,11 +57,11 @@ class DetailScreen extends StatelessWidget {
                   // margin: EdgeInsets.only(left: 30),
                   child: ListView.builder(
                     // mainAxisAlignment: MainAxisAlignment.center,
-                    itemCount: 3,
+                    itemCount: 4,
                     itemBuilder: (context, index) {
                       return Listdetail(
-                        title: expriance.toString(),
-                        disc: disc.toString(),
+                        title: data.expriance.toString(),
+                        disc: data.detail.toString(),
                         icon: Icons.calendar_today_rounded,
                         color: colors.k_white,
                       );
