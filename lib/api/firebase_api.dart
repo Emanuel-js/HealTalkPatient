@@ -3,11 +3,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:firebase_core/firebase_core.dart' as firebase_core;
-import 'package:flutter/foundation.dart';
 import 'package:path/path.dart';
 import 'package:healTalkpatient/index.dart';
 
-class FirebaseApi extends ChangeNotifier {
+class FirebaseApi {
   final _auth = FirebaseAuth.instance;
   static final CollectionReference patientCollection =
       FirebaseFirestore.instance.collection('Patient');
@@ -15,19 +14,11 @@ class FirebaseApi extends ChangeNotifier {
   static final CollectionReference doctorCollection =
       FirebaseFirestore.instance.collection('Doctor');
 
-  Patient _getdatafromSnapshot(DocumentSnapshot snapshot) {
-    return Patient(
-        pId: snapshot["pId"],
-        firstName: snapshot['firstName'],
-        lastName: snapshot["lastName"],
-        age: snapshot["age"],
-        email: snapshot["email"],
-        gender: snapshot["gender"],
-        picture: snapshot["picture"],
-        isanonymous: snapshot["isanonymous"],
-        createdDate: Utils.toDateTime(
-          snapshot['lastMessageTime'],
-        ));
+  Patient _getdatafromSnapshot(DocumentSnapshot snap) {
+    print("data frompatient.......");
+    print(snap.data());
+    print("data frompatient.......");
+    return Patient.fromJson(snap.data());
   }
 
   Stream<Patient> get patient => patientCollection
@@ -51,7 +42,7 @@ class FirebaseApi extends ChangeNotifier {
     await refMessages.add(newMessage.toJson());
 
     await doctorCollection
-        .doc("dNxllvTQJ9P4YK1NgojD")
+        .doc(uId)
         .update({PatientField.lastMessageTime: DateTime.now()});
   }
 
@@ -77,9 +68,11 @@ class FirebaseApi extends ChangeNotifier {
   //     createdAt: Utils.toDateTime(snapshot['createdAt']),
   //   );
 
-  Stream<List<Message>> getMessagesFromdoctor(String id) =>
+  Stream<List<Message>> getmessags(String id, String uId) =>
       FirebaseFirestore.instance
-          .collection('chats/$id/messages')
+          .collection('chats/${_auth.currentUser.uid}/messages')
+          // .where("ownerId", isEqualTo: id)
+          // .where("uId", isEqualTo: uId)
           .orderBy(MessageField.createdAt, descending: true)
           .snapshots()
           .map(_getmessagemap);

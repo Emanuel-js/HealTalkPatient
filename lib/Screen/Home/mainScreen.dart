@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:healTalkpatient/index.dart';
 import 'package:provider/provider.dart';
@@ -10,60 +12,61 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   bool isrequsest = false;
 
+  Timer _timer;
+  void _startTimer() {
+    _timer = Timer.periodic(Duration(minutes: 300), (timer) {
+      RequestApi().updateRequest(false);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final colors = Appcolor();
-    // final data = Provider.of<List<Doctor>>(context);
+    final data = Provider.of<List<Doctor>>(context);
+    print("fromhome........");
+    print(data);
     return Scaffold(
-      body: StreamBuilder<List<Doctor>>(
-        stream: DoctorData().getdoctor(),
-        builder: (ctx, snapshot) {
-          print(snapshot?.data);
-          if (!snapshot.hasData) return CustomProgress().progress();
-          final data = snapshot.data;
-
-          return Container(
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 20,
-                ),
-                Text(
-                  "Based on your criteria , these are the best matches for you",
-                  style: body1(),
-                  textAlign: TextAlign.center,
-                ),
-                SizedBox(
-                  height: 30,
-                ),
-                Expanded(
-                    child: data == null
-                        ? Text("no data")
-                        : ListView.builder(
-                            itemCount: data?.length,
-                            itemBuilder: (context, index) {
-                              return Cards(
-                                data: data[index],
-                                color: isrequsest
-                                    ? colors.k_redColor
-                                    : colors.k_primerygreenColor,
-                                btn: dynmaicBtn(context, data[index].dId),
-                                onDetail: () {
-                                  Navigator.push(
-                                    context,
-                                    createRoute(
-                                      DetailScreen(data: data[index]),
-                                    ),
+        body: data != null
+            ? Container(
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Text(
+                      "Based on your criteria , these are the best matches for you",
+                      style: body1(),
+                      textAlign: TextAlign.center,
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    Expanded(
+                        child: data == null
+                            ? Text("no data")
+                            : ListView.builder(
+                                itemCount: data?.length,
+                                itemBuilder: (context, index) {
+                                  return Cards(
+                                    data: data[index],
+                                    color: isrequsest
+                                        ? colors.k_redColor
+                                        : colors.k_primerygreenColor,
+                                    btn: dynmaicBtn(context, data[index].dId),
+                                    onDetail: () {
+                                      Navigator.push(
+                                        context,
+                                        createRoute(
+                                          DetailScreen(data: data[index]),
+                                        ),
+                                      );
+                                    },
                                   );
-                                },
-                              );
-                            }))
-              ],
-            ),
-          );
-        },
-      ),
-    );
+                                }))
+                  ],
+                ),
+              )
+            : CustomProgress().progress());
   }
 
   Widget dynmaicBtn(BuildContext context, String id) {
@@ -80,18 +83,42 @@ class _MainScreenState extends State<MainScreen> {
         },
       );
 
-    if (request.state == true && request.reqReciverId == id) {
+    if (request.state == true &&
+        request.reqReciverId == id &&
+        request.isaccepted == false) {
       return Button1(
           text: "waiting doctor",
           color: colors.k_gray2,
           onpress: () {
             Navigator.push(context, createRoute(WaitScreen()));
           });
+    } else if (request.state == true && request.isaccepted == false) {
+      return Button1(
+          text: "waiting doctor",
+          color: colors.k_gray2,
+          onpress: () {
+            DisplayMsg().displayMessage(
+                msg:
+                    "already send request please wait until doctor is back to you",
+                context: context);
+          });
+    } else if (request.state == true && request.isaccepted == true) {
+      return Button2(
+        color: colors.k_primerygreenColor,
+        text: "enjoy your sessions",
+        onpress: () {
+          // _timer.cancel();
+          DisplayMsg().displayMessage(
+              msg: "you already get a doctor pleas end sessions first!",
+              context: context);
+        },
+      );
     } else {
       return Button2(
         color: colors.k_primerygreenColor,
         text: "Request",
         onpress: () {
+          // _timer.cancel();
           showAlertDialog(
               context, "Are you Sure?", "Continu to Request A doctor", id);
         },
@@ -101,9 +128,10 @@ class _MainScreenState extends State<MainScreen> {
 
   _handelRequest(String id) {
     // final request = Provider.of<Request>(context);
-
+    print(id);
     setState(() {
       if (isrequsest) {
+        _startTimer();
         RequestApi().sendRequest(isrequsest, id);
         Navigator.pushReplacement(context, createRoute(WaitScreen()));
       }

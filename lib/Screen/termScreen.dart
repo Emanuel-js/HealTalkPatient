@@ -32,8 +32,7 @@ class TermScreen extends StatelessWidget {
             ),
             Container(
               padding: EdgeInsets.all(20),
-              child: Text(
-                  "ndmndnmndmsndmnsmdnmsndmndnmsdnmsnsdmnsmdnmsndsdmnmsndmsdnmnsdmnsmdnmsndmnsmdnsmdnmssdmsndmnsdnmdsnmsndmnsmdnmsndmnsdmnsmdnmsndmsndmnsdmnsmdnmsndmsndmnsdmnmsdnmsnmsndnsmdnmndsmndmnsmadnansjfonokjfksjdhfjhjdfhjkdshfjhdsjfhowehrihjfdhfjhuh"),
+              child: Text(""),
             )
           ],
         ),

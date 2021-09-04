@@ -13,11 +13,11 @@ class DetailScreen extends StatelessWidget {
         appBar: backAppBar(context: context, color: colors.k_white),
         backgroundColor: colors.k_white,
         body: SafeArea(
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
+            child: Column(
+                mainAxisSize: MainAxisSize.max,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
               // SizedBox(
               //   height: 30,
               // ),
@@ -25,10 +25,10 @@ class DetailScreen extends StatelessWidget {
               Center(
                   // Todo profile image
                   child: Hero(
-                tag: "profile-${data.dId}",
+                tag: "profile-${data?.dId}",
                 child: CircleAvatar(
                   radius: 90,
-                  backgroundImage: NetworkImage(data.img),
+                  backgroundImage: NetworkImage(data?.img),
                 ),
               )),
               //todo name
@@ -36,7 +36,7 @@ class DetailScreen extends StatelessWidget {
                 height: 30,
               ),
               Text(
-                data.fullName,
+                data?.fullName,
                 style: header1(),
                 textAlign: TextAlign.center,
               ),
@@ -44,7 +44,7 @@ class DetailScreen extends StatelessWidget {
                 height: 30,
               ),
               Text(
-                data.detail,
+                data?.detail,
                 style: body1(),
                 textAlign: TextAlign.center,
               ),
@@ -52,25 +52,11 @@ class DetailScreen extends StatelessWidget {
               SizedBox(
                 height: 30,
               ),
-              Expanded(
-                child: Container(
-                  // margin: EdgeInsets.only(left: 30),
-                  child: ListView.builder(
-                    // mainAxisAlignment: MainAxisAlignment.center,
-                    itemCount: 4,
-                    itemBuilder: (context, index) {
-                      return Listdetail(
-                        title: data.expriance.toString(),
-                        disc: data.detail.toString(),
-                        icon: Icons.calendar_today_rounded,
-                        color: colors.k_white,
-                      );
-                    },
-                  ),
-                ),
+
+              Container(
+                // margin: EdgeInsets.only(left: 30),
+                child: Listdetail(data: data),
               )
-            ],
-          ),
-        ));
+            ])));
   }
 }

@@ -1,6 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:healTalkpatient/index.dart';
+import 'package:intl/intl.dart';
 
 class MessageWidget extends StatelessWidget {
   final Message message;
@@ -17,43 +17,60 @@ class MessageWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final radius = Radius.circular(12);
     final borderRadius = BorderRadius.all(radius);
-    // print(Utils.fromDateTimeToJson(message.createdAt));
-    return Row(
-      mainAxisAlignment: isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
-      children: <Widget>[
-        if (!isMe)
-          CircleAvatar(
-              radius: 16, backgroundImage: NetworkImage(message.urlAvatar)),
-        Container(
-          padding: EdgeInsets.all(16),
-          margin: EdgeInsets.all(16),
-          constraints: BoxConstraints(maxWidth: 140),
-          decoration: BoxDecoration(
-            color: isMe ? Colors.grey[100] : Theme.of(context).accentColor,
-            borderRadius: isMe
-                ? borderRadius.subtract(BorderRadius.only(bottomRight: radius))
-                : borderRadius.subtract(BorderRadius.only(bottomLeft: radius)),
-          ),
-          child: buildMessage(),
-        ),
-      ],
-    );
-  }
+    String time = DateFormat.jm().format(message.createdAt);
 
-  Widget buildMessage() => Column(
+    // print(Utils.fromDateTimeToJson(message.createdAt));
+    return Column(
         crossAxisAlignment:
             isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
-        children: <Widget>[
-          Text(
+        children: [
+          Row(
+            mainAxisAlignment:
+                isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
+            children: <Widget>[
+              if (!isMe)
+                CircleAvatar(
+                    radius: 16,
+                    backgroundImage: NetworkImage(message.urlAvatar)),
+              Container(
+                padding: EdgeInsets.all(16),
+                margin: EdgeInsets.all(16),
+                constraints: BoxConstraints(maxWidth: 140),
+                decoration: BoxDecoration(
+                  color:
+                      isMe ? Colors.grey[100] : Theme.of(context).accentColor,
+                  borderRadius: isMe
+                      ? borderRadius
+                          .subtract(BorderRadius.only(bottomRight: radius))
+                      : borderRadius
+                          .subtract(BorderRadius.only(bottomLeft: radius)),
+                ),
+                child: buildMessage(),
+              ),
+            ],
+          ),
+          Container(
+              margin: EdgeInsets.symmetric(horizontal: 20),
+              color: Colors.white,
+              child: Text(
+                time,
+              )),
+        ]);
+  }
+
+  Widget buildMessage() {
+    return Column(
+      crossAxisAlignment:
+          isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+      children: <Widget>[
+        Container(
+          child: Text(
             message.message,
             style: TextStyle(color: isMe ? Colors.black : Colors.white),
             textAlign: isMe ? TextAlign.end : TextAlign.start,
           ),
-          Text(
-            "mm",
-            style: TextStyle(color: isMe ? Colors.black : Colors.white),
-            textAlign: isMe ? TextAlign.end : TextAlign.start,
-          ),
-        ],
-      );
+        ),
+      ],
+    );
+  }
 }

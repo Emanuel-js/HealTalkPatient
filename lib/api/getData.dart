@@ -7,43 +7,38 @@ class DoctorData {
 
   List<Doctor> _getDoctor(QuerySnapshot snapshot) {
     return snapshot.docs.map((doc) {
-      // print(doc["createdDate"]);
+      print('doctor data---');
+      print(doc.data());
       return Doctor(
-        fullName: doc["fullName"],
-        gender: doc["gender"],
-        expriance: doc["expriance"],
-        rate: doc["rate"],
-        focus: doc["focus"],
-        detail: doc["detail"],
-        img: doc["img"],
-        dId: doc["dId"],
-        requestStatus: doc["requestStatus"],
-        isRequstSend: doc["isRequstSend"],
-        createdDate: Utils.toDateTime(doc['createdDate']),
-      );
+          fullName: doc["fullName"],
+          gender: doc["gender"],
+          expriance: doc["expriance"],
+          rate: doc["rate"],
+          focus: doc["focus"],
+          detail: doc["detail"],
+          img: doc["img"],
+          dId: doc["dId"],
+          cv: doc["cv"],
+          email: doc["email"],
+          licence: doc["licence"],
+          address: doc["address"],
+          phone: doc["phone"],
+          nameTitle: doc["nameTitle"],
+          isactive: doc["isactive"],
+          dob: Utils.toDateTime(doc["dob"]),
+          requtSender: doc["requtSender"],
+          createdDate: Utils.toDateTime(doc['createdDate']));
     }).toList();
   }
 
   Doctor _getsingleDoctor(DocumentSnapshot doc) {
-    return Doctor(
-      fullName: doc["fullName"],
-      gender: doc["gender"],
-      expriance: doc["expriance"],
-      rate: doc["rate"],
-      focus: doc["focus"],
-      detail: doc["detail"],
-      img: doc["img"],
-      dId: doc["dId"],
-      requestStatus: doc["requestStatus"],
-      isRequstSend: doc["isRequstSend"],
-      createdDate: Utils.toDateTime(doc['createdDate']),
-    );
+    return Doctor().fromJson(doc.data());
   }
 
   // String id = "dNxllvTQJ9P4YK1NgojD";
   Stream<Doctor> getsingleDoctor(String id) =>
       (doctorCollection.doc(id).snapshots().map(_getsingleDoctor));
   // String id = "dNxllvTQJ9P4YK1NgojD";
-  Stream<List<Doctor>> getdoctor() =>
+  Stream<List<Doctor>> get getdoctor =>
       doctorCollection.snapshots().map(_getDoctor);
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
+import 'package:provider/provider.dart';
 
 import '../../index.dart';
 
@@ -10,7 +11,7 @@ class HomeScreen1 extends StatefulWidget {
 
 class _HomeScreen1State extends State<HomeScreen1> {
   final colors = Appcolor();
-  final hasnotification = true;
+  bool hasnotification = true;
   int page = 0;
   List<Widget> listWidgets = [
     MainScreen(),
@@ -19,6 +20,10 @@ class _HomeScreen1State extends State<HomeScreen1> {
   ];
   @override
   Widget build(BuildContext context) {
+    final info = Provider.of<Request>(context);
+    if (info != null) {
+      hasnotification = info.isaccepted;
+    }
     return Scaffold(
         drawer: SideMenu(),
         appBar: AppBar(

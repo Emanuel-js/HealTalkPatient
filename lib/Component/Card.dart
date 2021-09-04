@@ -28,7 +28,7 @@ class Cards extends StatelessWidget {
                   ),
                 ),
                 title: Text(
-                  data.fullName,
+                  data.nameTitle + "  " + data.fullName,
                   style: header2(),
                 ),
                 subtitle: Text(data.detail),
@@ -58,7 +58,7 @@ class Cards extends StatelessWidget {
                   padding: EdgeInsets.only(left: 10),
                 ),
                 Text(
-                  data.rate,
+                  "${data.rate}",
                   style: TextStyle(color: colors.k_seconderypurpleColor),
                   // style: body2(color: colors.k_seconderypurpleColor),
                 ),

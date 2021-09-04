@@ -109,10 +109,14 @@ class _ChatPageState extends State<ChatPage> {
 
 class MessageScreen extends StatelessWidget {
   @override
-  Widget build(BuildContext context) => Scaffold(
+  Widget build(BuildContext context) {
+    final info = Provider.of<Other>(context);
+
+    if (info != null) {
+      return Scaffold(
         body: SafeArea(
-          child: StreamBuilder<List<Doctor>>(
-            stream: DoctorData().getdoctor(),
+          child: StreamBuilder<Doctor>(
+            stream: DoctorData().getsingleDoctor(info.acceptedDoctorID),
             builder: (context, snapshot) {
               switch (snapshot.connectionState) {
                 case ConnectionState.waiting:
@@ -129,7 +133,7 @@ class MessageScreen extends StatelessWidget {
                       return Text("No Users Found");
                     } else
                       return Column(
-                        children: [ChatBodyWidget(doctor: snapshot.data)],
+                        children: [ChatBodyWidget(doctor: users)],
                       );
                   }
               }
@@ -137,6 +141,9 @@ class MessageScreen extends StatelessWidget {
           ),
         ),
       );
+    }
+    return CustomProgress().progress();
+  }
 }
 
 enum Menus { schedule, detail, end_sessions, report }

@@ -13,33 +13,51 @@ class RequestApi {
     final newRequest = Request(
       state: state,
       reqReciverId: reqReciverId,
-      reqOwnerId: _auth.currentUser.uid,
+      requtSender: _auth.currentUser.uid,
       isaccepted: false,
       timestamps: DateTime.now(),
     );
     await refRequests.doc(_auth.currentUser.uid).set(newRequest.toJson());
-    Map<String, dynamic> data = <String, dynamic>{
-      "isRequstSend": state,
-      "requtSender": _auth.currentUser.uid,
-      "requestStatus": state,
-    };
-    String id = "dNxllvTQJ9P4YK1NgojD";
-    await doctorCollection.doc(id).update(data).whenComplete(() => DisplayMsg()
-        .displayMessage(msg: "Request send for the Doctor!", context: context));
+
+//     Map data = {"requtSender": Doctor().requestSender(_auth.currentUser.uid)};
+
+// "Item": FieldValue.arrayUnion([
+//             {
+//               "name": itemName.toList()[0],
+//               "price": rate.toList()[0],
+//               "quantity": quantity.toList()[0]
+//             },
+//            {
+//               "name": itemName.toList()[1],
+//               "price": rate.toList()[1],
+//               "quantity": quantity.toList()[1]
+//             },
+//           ]),
+
+    // String id = "PteMaAT6IDSs34gdjHLVLRsBpRA2";
+    await doctorCollection
+        .doc(reqReciverId)
+        .update(Doctor().requestSender(_auth.currentUser.uid))
+        .whenComplete(() => DisplayMsg().displayMessage(
+            msg: "Request send for the Doctor!", context: context));
   }
 
-  //get request
+  Future updateRequest(bool state) async {
+    Map<String, dynamic> data = <String, dynamic>{
+      "requtSender": _auth.currentUser.uid,
+      "state": state,
+    };
+    await refRequests.doc(_auth.currentUser.uid).update(data).whenComplete(() =>
+        DisplayMsg()
+            .displayMessage(msg: "You request is Updated", context: context));
+  }
 
-  Request _getrequest(DocumentSnapshot snapshot) {
-    print("Request");
-    print(snapshot);
-    return Request(
-      isaccepted: snapshot["isaccepted"],
-      reqOwnerId: snapshot["reqOwnerId"],
-      reqReciverId: snapshot["reqReciverId"],
-      state: snapshot["state"],
-      timestamps: Utils.toDateTime(snapshot["timestamps"]),
-    );
+  Request _getrequest(DocumentSnapshot json) {
+    // print("request.......");
+    // print(json.data());
+    // print("request.......");
+
+    return Request().fromJson(json.data());
   }
 
   Stream<Request> get request =>

@@ -27,8 +27,8 @@ class Patient {
 
   static fromJson(Map<String, dynamic> json) => Patient(
         pId: json["pId"],
-        firstName: json['FirstName'],
-        lastName: json["LastName"],
+        firstName: json['firstName'],
+        lastName: json["lastName"],
         age: json["age"],
         email: json["email"],
         gender: json["gender"],

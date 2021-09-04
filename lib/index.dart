@@ -23,7 +23,6 @@ export 'Screen/Notification/notificationScreen.dart';
 // export screen message
 export 'Screen/Message/MessageScreen.dart';
 export 'Screen/Message/chat_body_widget.dart';
-export 'Screen/Message/chat_header_widget.dart';
 export 'Screen/Message/message_widget.dart';
 export 'Screen/Message/messages_widget.dart';
 export 'Screen/Message/new_message_widget.dart';
@@ -35,6 +34,7 @@ export 'utility/displayMessageforuser.dart';
 export 'utility/progress.dart';
 export 'utility/ImagePick.dart';
 export 'utility/formatConverter.dart';
+
 //export component
 export 'Component/Button.dart';
 export 'Component/logo.dart';
@@ -45,12 +45,14 @@ export 'Component/leadingNave.dart';
 export 'Component/Card.dart';
 export 'Component/listdata.dart';
 export 'Component/backarrowAppbar.dart';
+export 'Component/dialog.dart';
 
 // export model
 export 'models/user.dart';
 export 'models/message.dart';
 export 'models/doctor.dart';
 export 'models/request.dart';
+export 'models/other.dart';
 //export service
 
 export 'Controller/auth.dart';
@@ -61,3 +63,4 @@ export 'Controller/messageController.dart';
 export 'api/firebase_api.dart';
 export 'api/getData.dart';
 export 'api/requestData.dart';
+export 'api/getOther.dart';
