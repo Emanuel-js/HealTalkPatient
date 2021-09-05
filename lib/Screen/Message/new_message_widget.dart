@@ -19,10 +19,11 @@ class NewMessageWidget extends StatefulWidget {
 class _NewMessageWidgetState extends State<NewMessageWidget> {
   final _controller = TextEditingController();
   String message = '';
-
   void sendMessage() async {
     FocusScope.of(context).unfocus();
-
+    // print("..................");
+    // print(widget.idUser);
+    // print(".................");
     await FirebaseApi()
         .uploadMessage(widget.idUser, widget.ownerId, message, "m", "");
     print("message is send!");

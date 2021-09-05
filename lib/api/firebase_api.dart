@@ -29,7 +29,7 @@ class FirebaseApi {
   Future uploadMessage(String uId, String ownerId, String message, String url,
       String name) async {
     final refMessages =
-        FirebaseFirestore.instance.collection('chats/$ownerId/messages');
+        FirebaseFirestore.instance.collection('chats/$uId/messages');
 
     final newMessage = Message(
       ownerId: ownerId,
@@ -39,7 +39,7 @@ class FirebaseApi {
       message: message,
       createdAt: DateTime.now(),
     );
-    await refMessages.add(newMessage.toJson());
+    await refMessages.doc(ownerId).collection("chat").add(newMessage.toJson());
 
     await doctorCollection
         .doc(uId)
@@ -68,20 +68,21 @@ class FirebaseApi {
   //     createdAt: Utils.toDateTime(snapshot['createdAt']),
   //   );
 
-  Stream<List<Message>> getmessags(String id, String uId) =>
+  Stream<List<Message>> getmessags(String uId, String ownerId) =>
       FirebaseFirestore.instance
-          .collection('chats/${_auth.currentUser.uid}/messages')
+          .collection('chats/$uId/messages/$ownerId/chat')
           // .where("ownerId", isEqualTo: id)
           // .where("uId", isEqualTo: uId)
           .orderBy(MessageField.createdAt, descending: true)
           .snapshots()
           .map(_getmessagemap);
 
-  Stream<List<Message>> getMessagesfromuser() => FirebaseFirestore.instance
-      .collection('chats/${_auth.currentUser.uid}/messages')
-      .orderBy(MessageField.createdAt, descending: true)
-      .snapshots()
-      .map(_getmessagemap);
+  Stream<List<Message>> getMessagesfromuser(String id) =>
+      FirebaseFirestore.instance
+          .collection('chats/$id/messages')
+          .orderBy(MessageField.createdAt, descending: true)
+          .snapshots()
+          .map(_getmessagemap);
   // .transform(Utils.transformer(Message.fromJson));
 
 //UpdateItem
@@ -145,7 +146,7 @@ class FirebaseApi {
       lastName: lastName,
       gender: gender,
       isanonymous: isanonymous,
-      picture: picture,
+      picture: "https://i.pravatar.cc/300",
       age: age,
       createdDate: DateTime.now(),
     );

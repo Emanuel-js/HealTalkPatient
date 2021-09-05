@@ -17,7 +17,7 @@ class MessagesWidget extends StatelessWidget {
     final _auth = FirebaseAuth.instance;
 
     return StreamBuilder<List<Message>>(
-        stream: FirebaseApi().getMessagesfromuser(),
+        stream: FirebaseApi().getmessags(idUser, ownerId),
         builder: (context, snapshot) {
           if (!snapshot.hasData)
             return Container(
@@ -37,9 +37,8 @@ class MessagesWidget extends StatelessWidget {
             itemCount: ownerMsg.length,
             itemBuilder: (context, index) {
               final ownerMsgs = ownerMsg[index];
-              // final message = doctor[index];
-              print("owner Id = $ownerId");
-              print("userID =$idUser");
+              //  final message = doctor[index];
+
               return MessageWidget(
                 // ownermessage: ownerMsgs,
                 message: ownerMsgs,
