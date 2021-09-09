@@ -26,11 +26,11 @@ class WaitScreen extends StatelessWidget {
             ),
             Container(
               margin: EdgeInsets.only(right: 147),
-              child: Text("is confirm", style: header1()),
+              child: Text("accepts your request", style: header1()),
             ),
             Container(
               margin: EdgeInsets.only(right: 30, top: 40),
-              child: Text("We come back to you soon!", style: body2()),
+              child: Text("We will come back to you soon!", style: body2()),
             ),
             Image.asset(
               "asset/img/Dayflow Socializing.png",

@@ -5,10 +5,11 @@ import 'package:healTalkpatient/index.dart';
 class NewMessageWidget extends StatefulWidget {
   final String ownerId;
   final String idUser;
-
+  final String avaterUrl;
   const NewMessageWidget({
     @required this.ownerId,
     @required this.idUser,
+    @required this.avaterUrl,
     Key key,
   }) : super(key: key);
 
@@ -21,11 +22,9 @@ class _NewMessageWidgetState extends State<NewMessageWidget> {
   String message = '';
   void sendMessage() async {
     FocusScope.of(context).unfocus();
-    // print("..................");
-    // print(widget.idUser);
-    // print(".................");
-    await FirebaseApi()
-        .uploadMessage(widget.idUser, widget.ownerId, message, "m", "");
+
+    await FirebaseApi().uploadMessage(
+        widget.idUser, widget.ownerId, message, widget.avaterUrl, "");
     print("message is send!");
     _controller.clear();
   }

@@ -81,16 +81,6 @@ class _NotificationScreenState extends State<NotificationScreen> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
-                                          // Container(
-                                          //   child: Button1(
-                                          //       text: "cancel",
-                                          //       color: colors.k_redColor,
-                                          //       onpress: () {
-                                          //         setState(() {
-                                          //           isacc = false;
-                                          //         });
-                                          //       }),
-                                          // ),
                                           SizedBox(
                                             width: 40,
                                           ),

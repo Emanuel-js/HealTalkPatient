@@ -23,8 +23,7 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     final colors = Appcolor();
     final data = Provider.of<List<Doctor>>(context);
-    print("fromhome........");
-    print(data);
+
     return Scaffold(
         body: data != null
             ? Container(
@@ -79,7 +78,7 @@ class _MainScreenState extends State<MainScreen> {
         text: "Request",
         onpress: () {
           showAlertDialog(
-              context, "Are you Sure?", "Continu to Request A doctor", id);
+              context, "Are you sure?", "Continue to request a doctor", id);
         },
       );
 
@@ -99,7 +98,7 @@ class _MainScreenState extends State<MainScreen> {
           onpress: () {
             DisplayMsg().displayMessage(
                 msg:
-                    "already send request please wait until doctor is back to you",
+                    "Already sent request please wait until the doctor is back to you",
                 context: context);
           });
     } else if (request.state == true && request.isaccepted == true) {
@@ -109,7 +108,7 @@ class _MainScreenState extends State<MainScreen> {
         onpress: () {
           // _timer.cancel();
           DisplayMsg().displayMessage(
-              msg: "you already get a doctor pleas end sessions first!",
+              msg: "You already get a doctor please end your session first!",
               context: context);
         },
       );
@@ -120,7 +119,7 @@ class _MainScreenState extends State<MainScreen> {
         onpress: () {
           // _timer.cancel();
           showAlertDialog(
-              context, "Are you Sure?", "Continu to Request A doctor", id);
+              context, "Are you sure?", "Continue to request a doctor", id);
         },
       );
     }

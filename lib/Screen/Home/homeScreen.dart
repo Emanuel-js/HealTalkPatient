@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
+import 'package:healTalkpatient/Screen/Profile/profileScreen.dart';
 import 'package:provider/provider.dart';
 
 import '../../index.dart';
@@ -13,11 +14,7 @@ class _HomeScreen1State extends State<HomeScreen1> {
   final colors = Appcolor();
   bool hasnotification = true;
   int page = 0;
-  List<Widget> listWidgets = [
-    MainScreen(),
-    MessageScreen(),
-    HistoryChatScreen()
-  ];
+  List<Widget> listWidgets = [MainScreen(), MessageScreen(), ProfileScreen()];
   @override
   Widget build(BuildContext context) {
     final info = Provider.of<Request>(context);
@@ -64,8 +61,8 @@ class _HomeScreen1State extends State<HomeScreen1> {
           // style: TabStyle.titled,
           items: [
             TabItem(icon: Icons.home, title: 'Home'),
-            TabItem(icon: Icons.message, title: 'chat'),
-            TabItem(icon: Icons.schedule, title: 'Session History'),
+            TabItem(icon: Icons.message, title: 'Chat'),
+            TabItem(icon: Icons.schedule, title: 'Profile'),
           ],
           initialActiveIndex: 0, //optional, default as 0
           onTap: onItemTapped,

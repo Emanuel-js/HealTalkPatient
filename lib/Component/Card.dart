@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../index.dart';
 
-class Cards extends StatelessWidget {
+class Cards extends StatefulWidget {
   final Doctor data;
   final onDetail;
   final btn;
@@ -9,10 +9,22 @@ class Cards extends StatelessWidget {
   Cards({this.data, @required this.onDetail, this.btn, this.color});
 
   @override
+  _CardsState createState() => _CardsState();
+}
+
+class _CardsState extends State<Cards> {
+  @override
   Widget build(BuildContext context) {
     final colors = Appcolor();
     final padding = EdgeInsets.all(10);
-
+    double sum = 0;
+    double rate = 0;
+    widget.data?.rate?.forEach((element) {
+      setState(() {
+        sum += element;
+        rate = (sum) / (widget.data?.rate?.length + 5);
+      });
+    });
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 10),
       child: Card(
@@ -22,16 +34,16 @@ class Cards extends StatelessWidget {
               padding: padding,
               child: ListTile(
                 leading: Hero(
-                  tag: "profile-${data.dId}",
+                  tag: "profile-${widget.data.dId}",
                   child: CircleAvatar(
-                    backgroundImage: NetworkImage(data.img),
+                    backgroundImage: NetworkImage(widget.data.img),
                   ),
                 ),
                 title: Text(
-                  data.nameTitle + "  " + data.fullName,
+                  widget.data.nameTitle + "  " + widget.data.fullName,
                   style: header2(),
                 ),
-                subtitle: Text(data.detail),
+                subtitle: Text(widget.data.detail),
               ),
             ),
             Row(
@@ -41,7 +53,7 @@ class Cards extends StatelessWidget {
                 Container(
                     child: GestureDetector(
                   onTap: () {
-                    onDetail();
+                    widget.onDetail();
                   },
                   child: Text(
                     "detail",
@@ -49,7 +61,7 @@ class Cards extends StatelessWidget {
                   ),
                 )),
                 //todo button
-                Container(child: btn)
+                Container(child: widget.btn)
               ],
             ),
             Row(
@@ -58,9 +70,8 @@ class Cards extends StatelessWidget {
                   padding: EdgeInsets.only(left: 10),
                 ),
                 Text(
-                  "${data.rate}",
+                  "${double.parse((rate).toStringAsFixed(1))}",
                   style: TextStyle(color: colors.k_seconderypurpleColor),
-                  // style: body2(color: colors.k_seconderypurpleColor),
                 ),
                 Icon(
                   Icons.star,

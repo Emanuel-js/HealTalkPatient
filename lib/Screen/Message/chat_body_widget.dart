@@ -28,9 +28,9 @@ class ChatBodyWidget extends StatelessWidget {
   Widget buildChats(context) {
     final info = Provider.of<Other>(context);
     final req = Provider.of<Request>(context);
-    if (info == null && req == null) return Text("null");
+    if (info == null && req == null) return Text("");
 
-    if (info.acceptedDoctorID == doctor.dId || req.isaccepted == true) {
+    if (info?.acceptedDoctorID == doctor?.dId && req?.isaccepted == true) {
       return Container(
         height: 75,
         child: ListTile(
@@ -48,7 +48,7 @@ class ChatBodyWidget extends StatelessWidget {
       );
     } else {
       return Container(
-        child: Center(child: Text("No Doctor Arrived 😞")),
+        child: Center(child: Text("Please request a doctor 😞")),
       );
     }
   }

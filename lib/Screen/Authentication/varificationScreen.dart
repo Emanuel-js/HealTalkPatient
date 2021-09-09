@@ -73,7 +73,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
                 height: 30,
               ),
               OutlineButton1(
-                text: "Resend Varification",
+                text: "Resend Verification",
                 onpress: () {
                   user.sendEmailVerification();
                 },

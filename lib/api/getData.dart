@@ -7,8 +7,6 @@ class DoctorData {
 
   List<Doctor> _getDoctor(QuerySnapshot snapshot) {
     return snapshot.docs.map((doc) {
-      print('doctor data---');
-      print(doc.data());
       return Doctor(
           fullName: doc["fullName"],
           gender: doc["gender"],
@@ -41,4 +39,10 @@ class DoctorData {
   // String id = "dNxllvTQJ9P4YK1NgojD";
   Stream<List<Doctor>> get getdoctor =>
       doctorCollection.snapshots().map(_getDoctor);
+
+  Future addRate(String id, double rate) async {
+    await doctorCollection.doc(id).update({
+      'rate': FieldValue.arrayUnion([rate])
+    });
+  }
 }

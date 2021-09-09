@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:healTalkpatient/Screen/Profile/profileScreen.dart';
 import 'package:lite_rolling_switch/lite_rolling_switch.dart';
+import 'package:provider/provider.dart';
 import '../index.dart';
 
 class SideMenu extends StatefulWidget {
@@ -12,9 +13,43 @@ class SideMenu extends StatefulWidget {
 
 class _SideMenuState extends State<SideMenu> {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-  bool show = true;
+
+  bool isSwitched;
+
+  void toggleSwitch(bool value) {
+    if (isSwitched == false) {
+      setState(() {
+        isSwitched = true;
+        // textValue = 'Switch Button is ON';
+      });
+    } else {
+      setState(() {
+        isSwitched = false;
+        //  textValue = 'Switch Button is OFF';
+      });
+      // print('Switch Button is OFF');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    // setState(() {
+    //   if (isanonymous != null) isSwitched = isanonymous.isanonymous;
+    // });
+    void toggleSwitch(bool value) {
+      if (isSwitched == false) {
+        setState(() {
+          isSwitched = true;
+          FirebaseApi().updateName(true);
+        });
+      } else {
+        setState(() {
+          isSwitched = false;
+          FirebaseApi().updateName(false);
+        });
+      }
+    }
+
     final colors = Appcolor();
     return Material(
       child: Drawer(
@@ -37,31 +72,25 @@ class _SideMenuState extends State<SideMenu> {
                       Navigator.push(context, createRoute(ProfileScreen()));
                     },
                   ),
-                  buildMenuItem(
-                      icon: Icons.history,
-                      text: "Session History",
-                      ontab: () {}),
+                  // buildMenuItem(
+                  //     icon: Icons.history,
+                  //     text: "Session History",
+                  //     ontab: () {}),
                   Container(
                     margin: EdgeInsets.only(
                         right: MediaQuery.of(context).size.width * 0.3,
                         left: 10,
                         top: 30),
-                    child: LiteRollingSwitch(
-                      //initial value
-                      value: show,
-                      textOn: 'Show Name',
-                      textOff: 'Hide Name',
-                      colorOn: colors.k_seconderypurpleColor,
-                      colorOff: colors.k_purplecolor,
-                      iconOn: Icons.done,
-                      iconOff: Icons.remove_circle_outline,
-                      textSize: 12.0,
-                      onChanged: (bool state) {
-                        //Use it to manage the different states
-
-                        show = state;
-                      },
-                    ),
+                    child: Transform.scale(
+                        scale: 2,
+                        child: Switch(
+                          onChanged: toggleSwitch,
+                          value: isSwitched,
+                          activeColor: Colors.blue,
+                          activeTrackColor: Colors.yellow,
+                          inactiveThumbColor: Colors.redAccent,
+                          inactiveTrackColor: Colors.orange,
+                        )),
                   ),
                   buildMenuItem(
                       icon: Icons.feedback,

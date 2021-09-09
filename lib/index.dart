@@ -53,6 +53,7 @@ export 'models/message.dart';
 export 'models/doctor.dart';
 export 'models/request.dart';
 export 'models/other.dart';
+export 'models/report.dart';
 //export service
 
 export 'Controller/auth.dart';

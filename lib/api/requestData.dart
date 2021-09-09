@@ -8,6 +8,17 @@ class RequestApi {
   static final refRequests = FirebaseFirestore.instance.collection('Request');
   static final doctorCollection =
       FirebaseFirestore.instance.collection('Doctor');
+  static final reportCollection =
+      FirebaseFirestore.instance.collection('Report');
+
+  Future sendReport(String report, String id) async {
+    final newOther = Report(
+        senderId: _auth.currentUser.uid,
+        report: report,
+        doctorId: id,
+        createdDate: DateTime.now());
+    await reportCollection.doc(_auth.currentUser.uid).set(newOther.toJson());
+  }
 
   Future sendRequest(bool state, String reqReciverId) async {
     final newRequest = Request(
@@ -19,22 +30,6 @@ class RequestApi {
     );
     await refRequests.doc(_auth.currentUser.uid).set(newRequest.toJson());
 
-//     Map data = {"requtSender": Doctor().requestSender(_auth.currentUser.uid)};
-
-// "Item": FieldValue.arrayUnion([
-//             {
-//               "name": itemName.toList()[0],
-//               "price": rate.toList()[0],
-//               "quantity": quantity.toList()[0]
-//             },
-//            {
-//               "name": itemName.toList()[1],
-//               "price": rate.toList()[1],
-//               "quantity": quantity.toList()[1]
-//             },
-//           ]),
-
-    // String id = "PteMaAT6IDSs34gdjHLVLRsBpRA2";
     await doctorCollection
         .doc(reqReciverId)
         .update(Doctor().requestSender(_auth.currentUser.uid))
@@ -46,6 +41,17 @@ class RequestApi {
     Map<String, dynamic> data = <String, dynamic>{
       "requtSender": _auth.currentUser.uid,
       "state": state,
+    };
+    await refRequests.doc(_auth.currentUser.uid).update(data).whenComplete(() =>
+        DisplayMsg()
+            .displayMessage(msg: "You request is Updated", context: context));
+  }
+
+  Future endSessions(bool state) async {
+    Map<String, dynamic> data = <String, dynamic>{
+      "requtSender": _auth.currentUser.uid,
+      "state": state,
+      "isaccepted": state
     };
     await refRequests.doc(_auth.currentUser.uid).update(data).whenComplete(() =>
         DisplayMsg()

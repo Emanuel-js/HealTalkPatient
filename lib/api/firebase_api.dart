@@ -15,9 +15,6 @@ class FirebaseApi {
       FirebaseFirestore.instance.collection('Doctor');
 
   Patient _getdatafromSnapshot(DocumentSnapshot snap) {
-    print("data frompatient.......");
-    print(snap.data());
-    print("data frompatient.......");
     return Patient.fromJson(snap.data());
   }
 
@@ -44,6 +41,12 @@ class FirebaseApi {
     await doctorCollection
         .doc(uId)
         .update({PatientField.lastMessageTime: DateTime.now()});
+  }
+
+  Future updateName(bool state) async {
+    await patientCollection
+        .doc(_auth.currentUser.uid)
+        .update({'isanonymous': state});
   }
 
   List<Message> _getmessagemap(QuerySnapshot snapshot) {
